@@ -2,10 +2,10 @@ POST  http://localhost:3000/register
 Content-Type: application/json
 
  {
-    "userName":"Teebaeg",
-    "name": "Salim",
-    "email":"yourguyscow@youtu.be",
-    "password":"dCWLVppbYRC1"
+    "userName":"SolGen",
+    "name": "Bien",
+    "email":"solGeneration@youtu.be",
+    "password":"sdfhUHUbvy"
  }
 
 ####
@@ -13,8 +13,8 @@ POST  http://localhost:3000/login
 Content-Type: application/json
 
  {
-    "email":"abbyuri22@gmail.com",
-    "password":"aUniquePass"
+    "email":"yourguyscow@youtu.be",
+    "password":"dCWLVppbYRC1"
  } 
 
 ###
@@ -23,6 +23,6 @@ Content-Type: application/json
 
  {
     "userName": "Teebaeg",
-    "Name": "Davi",
+    "Name": "Love",
     "email":"yourguyscow@youtu.be"
  } 
