@@ -1,12 +1,14 @@
 const poolPromise = require("../config/pool");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const amqp = require('amqplib')
 //TOKEN = 2a$04$KcqhuNgF9kO
 
 const userControllers = {
   Register: async (req, res) => {
     const { userName, email, name, password } = req.body;
+    let channel;
+
     try {
       let pool = await poolPromise();
       const hashedPwd = await bcrypt.hash(password, 1);
@@ -30,12 +32,11 @@ const userControllers = {
         try {
           async function connect() {
             const amqpServer = "amqp://localhost:15672";
-            connection = await amqp.connect(amqpServer);
-            channel = await connection.createChannel();
+              connection = await amqp.connect(amqpServer);
+             channel = await connection.createChannel();
             await channel.assertQueue("registrationDetails");
           }
           connect();
-          
           channel.sendToQueue(
             "registrationDetails",
             Buffer.from(
@@ -46,7 +47,7 @@ const userControllers = {
             )
         )
          channel.assertQueue("registrationDetails");      
-        await channel.consume("registrationDetails", (data)=>{
+         channel.consume("registrationDetails", (data)=>{
           console.log(JSON.parse(data.content))
           channel.ack(data)
         })
@@ -72,9 +73,10 @@ const userControllers = {
         });
         return;
       } else {
-        return res.status(503).json({
+        console.log(error.message)
+        res.status(503).json({
           message: error.message,
-        });
+        });return;
       }
     }
   },
