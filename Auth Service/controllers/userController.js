@@ -1,30 +1,13 @@
 const poolPromise = require("../config/pool");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-<<<<<<< HEAD
-const amqp = require('amqplib');
 
-async function connect() {
-  const amqpServer = "amqp://localhost:5672";
-  connection = await amqp.connect(amqpServer);
-  channel = await connection.createChannel();
-  await channel.assertQueue("registrationDetails");
-}
-connect();
-=======
->>>>>>> dd7b108dd1ac7c26f89e8f2a7c5fce618cef13f3
+//TOKEN = 2a$04$KcqhuNgF9kO
 
 const userControllers = {
   Register: async (req, res) => {
     const { userName, email, name, password } = req.body;
-<<<<<<< HEAD
-
     try {
-
-
-=======
-    try {
->>>>>>> dd7b108dd1ac7c26f89e8f2a7c5fce618cef13f3
       let pool = await poolPromise();
       const hashedPwd = await bcrypt.hash(password, 1);
       console.log(hashedPwd);
@@ -44,36 +27,32 @@ const userControllers = {
           message: "user added",
           token: token,
         });
-<<<<<<< HEAD
-try {
-  async function connect() {
-    const amqpServer = "amqp://localhost:15672";
-    connection = await amqp.connect(amqpServer);
-    channel = await connection.createChannel();
-    await channel.assertQueue("registrationDetails");
-  }
-  connect();
-  
-  channel.sendToQueue(
-    "registrationDetails",
-    Buffer.from(
-        JSON.stringify({
-            name,
-            email,
+        try {
+          async function connect() {
+            const amqpServer = "amqp://localhost:15672";
+            connection = await amqp.connect(amqpServer);
+            channel = await connection.createChannel();
+            await channel.assertQueue("registrationDetails");
+          }
+          connect();
+          
+          channel.sendToQueue(
+            "registrationDetails",
+            Buffer.from(
+                JSON.stringify({
+                    name,
+                    email,
+                })
+            )
+        )
+         channel.assertQueue("registrationDetails");      
+        await channel.consume("registrationDetails", (data)=>{
+          console.log(JSON.parse(data.content))
+          channel.ack(data)
         })
-    )
-)
- channel.assertQueue("registrationDetails");      
-await channel.consume("registrationDetails", (data)=>{
-  console.log(JSON.parse(data.content))
-  channel.ack(data)
-})
-} catch (error) {
-  console.log(error.message)
-}
-
-
-        
+        } catch (error) {
+          console.log(error.message)
+        }
       }
     } catch (error) {
       if (
@@ -113,48 +92,6 @@ await channel.consume("registrationDetails", (data)=>{
 
         const auth = await bcrypt.compare(password, user.Password);
 
-=======
-        return;
-      }
-    } catch (error) {
-      if (
-        error.message ===
-        `Violation of UNIQUE KEY constraint 'UQ__Users__737584F6AB5E7840'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (${email}).`
-      ) {
-        res.status(404).json({
-          message: "email is already a user please login",
-        });
-        return;
-      } else if (
-        error.message ===
-        `Violation of UNIQUE KEY constraint 'UQ__Users__737584F6AB5E7840'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (${userName}).`
-      ) {
-        res.status(404).json({
-          message: "Username is already taken",
-        });
-        return;
-      } else {
-        return res.status(503).json({
-          message: error.message,
-        });
-      }
-    }
-  },
-
-  login: async (req, res) => {
-    const { email, password } = req.body;
-    try {
-      let pool = await poolPromise();
-      let findUser =
-        await pool.request()
-        .input('email', email)
-        .execute(`dbo.LoginUser`)
-      if (findUser.recordset.length > 0) {
-        const user = findUser.recordset[0];
-
-        const auth = await bcrypt.compare(password, user.Password);
-
->>>>>>> dd7b108dd1ac7c26f89e8f2a7c5fce618cef13f3
         if (auth) {
           const token = jwt.sign({ email: email }, process.env.TOKEN, {
             expiresIn: "20m",
