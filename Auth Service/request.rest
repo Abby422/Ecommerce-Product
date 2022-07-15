@@ -2,17 +2,27 @@ POST  http://localhost:3000/register
 Content-Type: application/json
 
  {
-    "userName":"Bubba",
-    "email":"bubba@gmail.com",
-    "password":"password1"
+    "userName":"SolGen",
+    "name": "Bien",
+    "email":"solGeneration@youtu.be",
+    "password":"sdfhUHUbvy"
  }
 
 ####
-
 POST  http://localhost:3000/login
 Content-Type: application/json
 
  {
-    "email":"bubba@gmail.com",
-    "password":"password1"
+    "email":"yourguyscow@youtu.be",
+    "password":"dCWLVppbYRC1"
+ } 
+
+###
+POST  http://localhost:3000/updateProfile
+Content-Type: application/json
+
+ {
+    "userName": "Teebaeg",
+    "Name": "Love",
+    "email":"yourguyscow@youtu.be"
  } 
