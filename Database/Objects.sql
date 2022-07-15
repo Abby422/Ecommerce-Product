@@ -9,6 +9,8 @@
 --     User_role VARCHAR(50) DEFAULT 'User' NOT NULL
 -- );
 
+SELECT * FROM users
+
 -- UPDATE Users
 -- SET User_role = 'Admin'
 -- WHERE User_Id = 1
