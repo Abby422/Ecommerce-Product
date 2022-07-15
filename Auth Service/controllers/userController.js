@@ -9,7 +9,7 @@ const userControllers = {
         const { userName, email, password } = req.body;
         try {
             let pool = await poolPromise();
-            const hashedPwd = await bcrypt.hash(password, 1);
+            const hashedPwd = await bcrypt.hash(password, 4);
             console.log(hashedPwd)
             let insertQry = await pool.query(`INSERT INTO users(userName, email, userPassword) values ('${userName}','${email}', '${hashedPwd}')`)
             if (insertQry) {
