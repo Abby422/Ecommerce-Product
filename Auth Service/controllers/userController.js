@@ -9,9 +9,12 @@ const userControllers = {
       let pool = await poolPromise();
       const hashedPwd = await bcrypt.hash(password, 1);
       console.log(hashedPwd);
-      let insertQry = await pool.query(
-        `INSERT INTO Users(Username, Email, Name, Password) VALUES ('${userName}','${email}','${name}', '${hashedPwd}')`
-      );
+      let insertQry = await pool.request()
+      .input('userName', userName)
+      .input('email', email)
+      .input('name', name)
+      .input('password', password)
+      .execute(`dbo.RegisterUser`)
       if (insertQry) {
         const token = jwt.sign({ email: email }, process.env.TOKEN, {
           expiresIn: "20m",
@@ -54,7 +57,9 @@ const userControllers = {
     try {
       let pool = await poolPromise();
       let findUser =
-        await pool.query(`SELECT *FROM Users WHERE Email = '${email}'`);
+        await pool.request()
+        .input('email', email)
+        .execute(`dbo.LoginUser`)
       if (findUser.recordset.length > 0) {
         const user = findUser.recordset[0];
 
@@ -95,10 +100,11 @@ const userControllers = {
     try {
       let pool = await poolPromise();
       const updateProfile = 
-      await pool
-        .query(
-          `UPDATE Users SET Username = '${userName}', Name = '${Name}' WHERE Email = '${email}'`
-        )
+      await pool.request()
+        .input('userName', userName)
+        .input('name', Name)
+        .input('email', email)
+        .execute(`dbo.UpdateUser`)
         if(updateProfile){
           res.status(200).json({
             success: true,
@@ -107,7 +113,7 @@ const userControllers = {
         }
         return;
     } catch (error) {
-      if (
+      if (//should be changed
         error.message ===
         `Violation of UNIQUE KEY constraint 'UQ__Users__737584F6AB5E7840'. Cannot insert duplicate key in object 'dbo.Users'. The duplicate key value is (${userName}).`
       ) {
