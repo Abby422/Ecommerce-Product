@@ -14,3 +14,17 @@ AS
 BEGIN
     SELECT *FROM Users WHERE Email = @email
 END
+GO
+-----Create admin -----
+
+CREATE OR ALTER PROC spAdmin
+(@userName INT)
+AS
+BEGIN
+UPDATE Users
+SET User_role = 'Admin'
+WHERE Username = @userName
+END
+GO
+
+--- end of spAdmin
