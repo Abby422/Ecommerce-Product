@@ -23,7 +23,7 @@ SELECT * FROM users
 --     Product_description VARCHAR(6000) NOT NULL,
 --     Product_price INT NOT NULL,
 --     Quantity INT NOT NULL,
---     Discount INT,
+--     Discount INT DEFAULT 0,
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 --     IsAvailable BIT NOT NULL DEFAULT 0
 -- );
