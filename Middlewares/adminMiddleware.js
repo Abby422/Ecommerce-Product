@@ -5,7 +5,7 @@ const adminAuth = async (req, res, next)=>{
 
     try {
         let pool = await poolPromise()
-        let adminQry = await pool.query(`SELECT * FROM users WHERE email = ${email}`)
+        let adminQry = await pool.query(`SELECT * FROM Users WHERE email = ${email}`)
         if(adminQry.recordset.length > 0){
             const user = admin.recordset[0];
             if( user.role === 'admin'){
