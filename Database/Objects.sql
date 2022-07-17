@@ -9,6 +9,8 @@
 --     User_role VARCHAR(50) DEFAULT 'User' NOT NULL
 -- );
 
+SELECT * FROM users
+
 -- UPDATE Users
 -- SET User_role = 'Admin'
 -- WHERE User_Id = 1
@@ -21,7 +23,7 @@
 --     Product_description VARCHAR(6000) NOT NULL,
 --     Product_price INT NOT NULL,
 --     Quantity INT NOT NULL,
---     Discount INT,
+--     Discount INT DEFAULT 0,
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 --     IsAvailable BIT NOT NULL DEFAULT 0
 -- );
@@ -114,9 +116,3 @@ SELECT * FROM ProductCategory WHERE (Categroy_name) LIKE ''
 -- INSERT INTO Product(Category_id, Product_image, Product_name, Product_description, Product_price, Quantity) VALUES ('2', ' ', ' ', ' ', '959', '9' );
 -- INSERT INTO Product(Category_id, Product_image, Product_name, Product_description, Product_price, Quantity) VALUES ('2', ' ', ' ', ' ', '890', '12' );
 GO
-
--- DELETE
--- FROM
---     Product
--- WHERE
---     Product_id = 29;
