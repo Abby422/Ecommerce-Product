@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RegisterUser]
 AS
 BEGIN
     INSERT INTO Users(Username, Email, Name, Password) 
-    VALUES ('@userName','@email ','@name ', '@password')
+    VALUES (@userName, @email , @name , @password)
 END
 GO
 
@@ -50,17 +50,13 @@ GO
 
 EXEC dbo.CreateOrder    2,1,125,1
 GO
--- SELECT *FROM Orders
--- DELETE 
--- FROM
--- Orders
--- WHERE
--- Order_id = 2
 
 CREATE OR ALTER PROCEDURE [dbo].[EnterOrderDetails]
 (@OrderId INT, @ProductId INT)
 AS
 BEGIN
     INSERT INTO OrderDetails(Order_id, Product_id) 
-    VALUES ('@UserId', '@ProductId')
+    VALUES ('@OrderId', '@ProductId')
+
 END
+
