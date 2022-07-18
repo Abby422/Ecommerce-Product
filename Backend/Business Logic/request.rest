@@ -1,0 +1,19 @@
+###
+
+POST http://localhost:3000/search
+Content-Type: application/json
+
+{
+    "Search": "Cup"
+}
+
+###
+POST http://localhost:3000/checkout
+Content-Type: application/json
+
+{
+    "UserId": 5,
+    "quantity":  1,
+    "total": 140,
+    "ProductId":  [3, 7]
+}
