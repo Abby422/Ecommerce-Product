@@ -9,6 +9,8 @@
 --     User_role VARCHAR(50) DEFAULT 'User' NOT NULL
 -- );
 
+SELECT * FROM users
+
 -- UPDATE Users
 -- SET User_role = 'Admin'
 -- WHERE User_Id = 1
@@ -21,24 +23,23 @@
 --     Product_description VARCHAR(6000) NOT NULL,
 --     Product_price INT NOT NULL,
 --     Quantity INT NOT NULL,
---     Discount INT,
+--     Discount INT DEFAULT 0,
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 --     IsAvailable BIT NOT NULL DEFAULT 0
 -- );
-DROP TABLE Product
 -- CREATE TABLE ProductCategory(
 --     Category_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 --     Categroy_name VARCHAR(6000)
 -- );
 
-CREATE TABLE Orders(
-    Order_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    User_Id INT NOT NULL FOREIGN KEY REFERENCES Users(User_Id),
-    Quantity INT NOT NULL,
-    total INT,
-    Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    IsCanceled BIT NOT NULL DEFAULT 0
-);
+-- CREATE TABLE Orders(
+--     Order_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--     User_Id INT NOT NULL FOREIGN KEY REFERENCES Users(User_Id),
+--     Quantity INT NOT NULL,
+--     total INT,
+--     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+--     IsCanceled BIT NOT NULL DEFAULT 0
+-- );
 -- SELECT * FROM Users WHERE IsDeleted = 0
 
 
@@ -51,14 +52,14 @@ CREATE TABLE Orders(
 INSERT INTO Orders (User_Id, Quantity, total) VALUES ('2', '1', '125')
 GO
 
-CREATE OR ALTER TRIGGER trg_order
-ON Orders
-AFTER INSERT
-AS
-BEGIN
-    SET NOCOUNT ON;
-    INSERT INTO OrderDetails (Order_id) VALUES
-END
+-- CREATE OR ALTER TRIGGER trg_order
+-- ON Orders
+-- AFTER INSERT
+-- AS
+-- BEGIN
+--     SET NOCOUNT ON;
+--     INSERT INTO OrderDetails (Order_id, Product_id) VALUES 
+-- END
 
 
 
@@ -71,6 +72,7 @@ SELECT *FROM ProductCategory
 SELECT *FROM Product
 SELECT *FROM Users
 SELECT *FROM Orders
+SELECT *FROM OrderDetails
 
 SELECT * FROM ProductCategory WHERE (Categroy_name) LIKE ''
 -- JOIN Product
@@ -114,9 +116,3 @@ SELECT * FROM ProductCategory WHERE (Categroy_name) LIKE ''
 -- INSERT INTO Product(Category_id, Product_image, Product_name, Product_description, Product_price, Quantity) VALUES ('2', ' ', ' ', ' ', '959', '9' );
 -- INSERT INTO Product(Category_id, Product_image, Product_name, Product_description, Product_price, Quantity) VALUES ('2', ' ', ' ', ' ', '890', '12' );
 GO
-
--- DELETE
--- FROM
---     Product
--- WHERE
---     Product_id = 29;
