@@ -1,11 +1,11 @@
-POST  http://localhost:3000/register
+POST  http://localhost:5000/register
 Content-Type: application/json
 
  {
-    "userName":"SolGen",
-    "name": "Bien",
-    "email":"solGeneration@youtu.be",
-    "password":"sdfhUHUbvy"
+    "userName":"testUser13",
+    "name": "user13",
+    "email":"testuser13@gmail.com",
+    "password":"password13"
  }
 
 ####
