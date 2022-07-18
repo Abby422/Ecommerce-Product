@@ -27,22 +27,25 @@ SELECT * FROM users
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 --     IsAvailable BIT NOT NULL DEFAULT 0
 -- );
-DROP TABLE Product
 -- CREATE TABLE ProductCategory(
 --     Category_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 --     Categroy_name VARCHAR(6000)
 -- );
 
-CREATE TABLE Orders(
-    Order_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    User_Id INT NOT NULL FOREIGN KEY REFERENCES Users(User_Id),
-    Quantity INT NOT NULL,
-    total INT,
-    Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    IsCanceled BIT NOT NULL DEFAULT 0
-);
+-- CREATE TABLE Orders(
+--     Order_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--     User_Id INT NOT NULL FOREIGN KEY REFERENCES Users(User_Id),
+--     Quantity INT NOT NULL,
+--     total INT,
+--     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+--     IsCanceled BIT NOT NULL DEFAULT 0
+-- );
 -- SELECT * FROM Users WHERE IsDeleted = 0
 
+-- CREATE TABLE Temp_Orders(
+--     Temporder INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--     Product_id INT NOT NULL FOREIGN KEY REFERENCES Product(Product_id),
+-- )
 
 -- CREATE TABLE OrderDetails(
 --     OrderDetails INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -58,11 +61,18 @@ ON Orders
 AFTER INSERT
 AS
 BEGIN
+    DECLARE
+    @OrderId INT,
+    @ProductId INT
     SET NOCOUNT ON;
-    INSERT INTO OrderDetails (Order_id) VALUES
+    SELECT @OrderId = Order_id FROM INSERTED
+    SET @ProductId = 2
+    
+    
 END
 
-
+DELETE
+FROM Orders
 
 -- INSERT INTO ProductCategory VALUES ('Kitchen and Dining');
 -- INSERT INTO ProductCategory VALUES ('Living Room')
@@ -73,6 +83,7 @@ SELECT *FROM ProductCategory
 SELECT *FROM Product
 SELECT *FROM Users
 SELECT *FROM Orders
+SELECT *FROM OrderDetails
 
 SELECT * FROM ProductCategory WHERE (Categroy_name) LIKE ''
 -- JOIN Product

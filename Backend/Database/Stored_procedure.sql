@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE [dbo].[RegisterUser]
 AS
 BEGIN
     INSERT INTO Users(Username, Email, Name, Password) 
-    VALUES (@userName, @email , @name , @password)
+    VALUES ('@userName','@email ','@name ', '@password')
 END
 GO
 
@@ -39,7 +39,7 @@ GO
 -- EXEC dbo.SearchProduct 'Cou'
 
 CREATE OR ALTER PROCEDURE [dbo].[CreateOrder]
-( @UserId INT, @Quantity INT, @total INT, @ProductId INT)
+( @UserId INT, @Quantity INT, @total INT)
 AS
 BEGIN
     INSERT INTO Orders(User_Id, Quantity, total) 
@@ -48,15 +48,22 @@ BEGIN
 END
 GO
 
-EXEC dbo.CreateOrder    2,1,125,1
+EXEC dbo.CreateOrder    2,1,125
 GO
+-- SELECT *FROM Orders
+-- DELETE 
+-- FROM
+-- Orders
+-- WHERE
+-- Order_id = 2
 
-CREATE OR ALTER PROCEDURE [dbo].[EnterOrderDetails]
-(@OrderId INT, @ProductId INT)
+CREATE OR ALTER PROCEDURE [dbo].[EnterProducts]
+( @ProductId INT)
 AS
 BEGIN
-    INSERT INTO OrderDetails(Order_id, Product_id) 
-    VALUES ('@OrderId', '@ProductId')
-
+    INSERT INTO Temp_Orders
+    VALUES (@ProductId)
 END
 
+INSERT INTO Temp_Orders ()
+    VALUES (1,2,3)
