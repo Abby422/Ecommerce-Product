@@ -42,6 +42,10 @@ SELECT * FROM users
 -- );
 -- SELECT * FROM Users WHERE IsDeleted = 0
 
+-- CREATE TABLE Temp_Orders(
+--     Temporder INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--     Product_id INT NOT NULL FOREIGN KEY REFERENCES Product(Product_id),
+-- )
 
 -- CREATE TABLE OrderDetails(
 --     OrderDetails INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
@@ -52,16 +56,23 @@ SELECT * FROM users
 INSERT INTO Orders (User_Id, Quantity, total) VALUES ('2', '1', '125')
 GO
 
--- CREATE OR ALTER TRIGGER trg_order
--- ON Orders
--- AFTER INSERT
--- AS
--- BEGIN
---     SET NOCOUNT ON;
---     INSERT INTO OrderDetails (Order_id, Product_id) VALUES 
--- END
+CREATE OR ALTER TRIGGER trg_order
+ON Orders
+AFTER INSERT
+AS
+BEGIN
+    DECLARE
+    @OrderId INT,
+    @ProductId INT
+    SET NOCOUNT ON;
+    SELECT @OrderId = Order_id FROM INSERTED
+    SET @ProductId = 2
+    
+    
+END
 
-
+DELETE
+FROM Orders
 
 -- INSERT INTO ProductCategory VALUES ('Kitchen and Dining');
 -- INSERT INTO ProductCategory VALUES ('Living Room')

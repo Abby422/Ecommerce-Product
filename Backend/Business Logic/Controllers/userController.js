@@ -35,7 +35,11 @@ module.exports = {
             .input('UserId', UserId)
             .input('Quantity', quantity)
             .input('total', total)
-            .execute(`dbo.CreateOrder`)
+            .execute(`dbo.CreateOrder`);
+
+            pool.request()
+            .input('ProductId', ProductId)
+            .execute(`dbo.EnterProducts`)
             .then(result =>{
                     // console.log(pool);
                     console.log(result)
