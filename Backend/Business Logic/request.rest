@@ -17,3 +17,11 @@ Content-Type: application/json
     "total": 140,
     "ProductId":  [3, 7]
 }
+####
+
+POST http://localhost:3000/setAdmin
+Content-Type: application/json
+
+{
+    "userID": 12
+}
