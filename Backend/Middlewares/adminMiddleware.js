@@ -1,4 +1,4 @@
-const poolPromise = require('../Auth/config/pool.js');
+const poolPromise = require('../config/pool.js');
 
 const adminAuth = async (req, res, next)=>{
     const {email} = req.params
@@ -8,7 +8,7 @@ const adminAuth = async (req, res, next)=>{
         let adminQry = await pool.query(`SELECT * FROM Users WHERE email = ${email}`)
         if(adminQry.recordset.length > 0){
             const user = admin.recordset[0];
-            if( user.role === 'admin'){
+            if( user.User_role === 'Admin'){
                 res.status(200).send('You are an admin')
             }else{
                 res.status(503).send('You are not an admin')
