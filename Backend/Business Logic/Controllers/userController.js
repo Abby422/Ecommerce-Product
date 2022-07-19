@@ -1,10 +1,10 @@
-const poolPromise = require("../config/pool");
+const poolPromise = require("../Config/pool");
 
 
 module.exports = {
     search : async (req,res) => {
+        const { Search } = req.body // need to change to query or body
         try {
-            const { Search } = req.body // need to change to query or body
             let pool = await poolPromise()
             pool.request()
             .input('Search', Search)
@@ -28,8 +28,8 @@ module.exports = {
     },
 
     order : async (req, res) => {
+        const {UserId, quantity, total, ProductId} = req.body
         try {
-            const {UserId, quantity, total, ProductId} = req.body
             let pool = await poolPromise()
             pool.request()
             .input('UserId', UserId)
@@ -53,5 +53,25 @@ module.exports = {
         } catch (error) {
             console.log(error.message)
         }
+    },
+    setAdmin :async(req, res)=>{
+        const{userID} = req.body
+        try {
+            let pool = await poolPromise()
+           const setAdmin = pool.request()
+            .input('UserId', userID)
+            .execute('spAdmin');
+            if(setAdmin){
+                // console.log('User is now admin')
+                res.status(200).json({
+                    message:"User set to admin"
+                }); return;
+            }
+
+            
+        } catch (error) {
+           console.log(error.message) 
+        }
+
     }
 }
