@@ -162,7 +162,7 @@ BEGIN
 
 END
 GO
-
+spAdmin 3
 ----End of Create Admin------
 
 
