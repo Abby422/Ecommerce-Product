@@ -139,12 +139,10 @@ GO
 
 
 -----Get all Products ------
-CREATE OR ALTER PROC spGetAllProduct(
-    @productID INT
-)
+CREATE OR ALTER PROC spGetAllProduct
 AS
 BEGIN
-SELECT * FROM Product WHERE Product_id = @productID
+SELECT * FROM Product 
 END
 GO
 
