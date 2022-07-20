@@ -1,12 +1,13 @@
 import './App.css';
-import Footer from './Components/Footer';
-import Navigation from './Components/Navigation';
+import Footer from './Components/Footer/Footer';
+import LandingPage from './Components/LandingPage/LandingPage';
+import Navigation from './Components/Navigation/Navigation';
 
 function App() {
   return (
     <div className="App">
       <Navigation/>
-      <h1>HELLO</h1>
+      <LandingPage />
       <Footer/>
     </div>
   );
