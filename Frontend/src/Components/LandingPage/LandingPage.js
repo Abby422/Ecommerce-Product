@@ -37,7 +37,7 @@ function LandingPage() {
 
       <div className="landing-caurosel">
         <div className="slider-container">
-          <Slider autoplay={true} autoplaySpeed={2000} dots={true} fade={true} infinite={true}>
+          <Slider autoplay={true} autoplaySpeed={3000} dots={true} fade={true} infinite={true} slideToShow={1} slideToScroll={1}>
             <div>
               <img src={ImageOne} className="slider " alt="caurosel"></img>
             </div>
