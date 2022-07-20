@@ -162,11 +162,8 @@ BEGIN
 
 END
 GO
-<<<<<<< HEAD
-spAdmin 3
-=======
+EXEC pAdmin 3
 
->>>>>>> 4b0337205eca29fcdc2d1d34344efb1353729745
 ----End of Create Admin------
 
 

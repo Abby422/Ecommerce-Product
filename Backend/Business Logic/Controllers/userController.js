@@ -61,17 +61,28 @@ module.exports = {
            const setAdmin = pool.request()
             .input('UserId', userID)
             .execute('spAdmin');
-            if(setAdmin){
+            setAdmin.then(result=>{
+                console.log(result)
+
+          
+            if(result.rowsAffected[0] > 0){
                 // console.log('User is now admin')
-                res.status(200).json({
+                return res.status(200).json({
                     message:"User set to admin"
-                }); return;
+                });
+            }else{
+                return res.status(400).json({
+                    message:"User not set to admin"
+                });
             }
 
-            
+        })            
         } catch (error) {
            console.log(error.message) 
         }
+
+    },
+    addProduct:async(req, res)=>{
 
     }
 }
