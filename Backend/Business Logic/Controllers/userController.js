@@ -32,7 +32,7 @@ module.exports = {
         try {
             let pool = await poolPromise()
             pool.request()
-            .input('UserId', UserId)
+            .input('UserId', UserId)//should be a string
             .input('Quantity', quantity)
             .input('total', total)
             .execute(`dbo.CreateOrder`);

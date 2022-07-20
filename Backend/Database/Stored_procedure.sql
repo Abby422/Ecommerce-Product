@@ -162,11 +162,7 @@ BEGIN
 
 END
 GO
-<<<<<<< HEAD
-spAdmin 3
-=======
-
->>>>>>> 4b0337205eca29fcdc2d1d34344efb1353729745
+-- spAdmin 3
 ----End of Create Admin------
 
 
