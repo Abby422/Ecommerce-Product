@@ -1,8 +1,7 @@
 const poolPromise = require('./config/pool');
 
-function adminAuth (email){
-    return async (req, res, next)=>{
-
+const adminAuth = async (req, res, next)=>{
+    const{email}= req.body;
     try {
         let pool = await poolPromise()
         let adminQry = await pool.query(`SELECT * FROM Users WHERE email = '${email}'`)
@@ -22,6 +21,6 @@ function adminAuth (email){
       res.status(503).send(error.message)  
     }
 
-}}
+}
 
 module.exports = adminAuth;
