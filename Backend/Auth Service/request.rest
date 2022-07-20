@@ -1,0 +1,28 @@
+POST  http://localhost:5000/register
+Content-Type: application/json
+
+ {
+    "userName":"testUser13",
+    "name": "user13",
+    "email":"testuser13@gmail.com",
+    "password":"password13"
+ }
+
+####
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+ {
+    "email":"yourguyscow@youtu.be",
+    "password":"dCWLVppbYRC1"
+ } 
+
+###
+POST  http://localhost:3000/updateProfile
+Content-Type: application/json
+
+ {
+    "userName": "Teebaeg",
+    "Name": "Love",
+    "email":"yourguyscow@youtu.be"
+ } 
