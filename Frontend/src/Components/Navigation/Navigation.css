@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Navigation{
+    padding-top: 20px ;
+    width: 80%;
+    margin-left: 100px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    font-family: 'Italiana', serif;
+    font-size: 36px;
+    z-index: 2;
+}
+
+.abby-navigation-logo{
+    display: flex;
+    padding-left: 10px;
+    justify-content: space-around;
+}
+
+.abby-navigation-left{
+    display: flex;
+    width: 10%;
+    justify-content: space-evenly;
+    right: 50px;
+}
