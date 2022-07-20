@@ -23,5 +23,6 @@ POST http://localhost:3000/setAdmin
 Content-Type: application/json
 
 {
-    "userID": 12
+    "email":"testuser6@gmail.com", 
+    "userID": 17
 }
