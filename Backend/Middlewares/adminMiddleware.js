@@ -1,20 +1,20 @@
-const poolPromise = require('../config/pool.js');
+const poolPromise = require('./config/pool');
 
-const adminAuth = async (req, res, next)=>{
-    const {email} = req.params
+function adminAuth (email){
+    return async (req, res, next)=>{
 
     try {
         let pool = await poolPromise()
-        let adminQry = await pool.query(`SELECT * FROM Users WHERE email = ${email}`)
+        let adminQry = await pool.query(`SELECT * FROM Users WHERE email = '${email}'`)
         if(adminQry.recordset.length > 0){
-            const user = admin.recordset[0];
+            const user = adminQry.recordset[0];
             if( user.User_role === 'Admin'){
-                res.status(200).send('You are an admin')
+                console.log('You are an admin')
             }else{
-                res.status(503).send('You are not an admin')
+                console.log('You are not an admin')
             }
         }else{
-            res.status(404).send('User not Found please Sign up')
+            console.log('User not Found please Sign up')
         }
         next();
     } catch (error) {
@@ -22,6 +22,6 @@ const adminAuth = async (req, res, next)=>{
       res.status(503).send(error.message)  
     }
 
-}
+}}
 
 module.exports = adminAuth;
