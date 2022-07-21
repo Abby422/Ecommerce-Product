@@ -32,10 +32,17 @@ module.exports = {
         try {
             let pool = await poolPromise()
             pool.request()
+<<<<<<< HEAD
+                .input('UserId', UserId)
+                .input('Quantity', quantity)
+                .input('total', total)
+                .execute(`dbo.CreateOrder`);
+=======
             .input('UserId', UserId)//should be a string
             .input('Quantity', quantity)
             .input('total', total)
             .execute(`dbo.CreateOrder`);
+>>>>>>> 5cae264aedc44f76a479e5e48df5ab4e5638f579
 
             pool.request()
                 .input('ProductId', ProductId)
