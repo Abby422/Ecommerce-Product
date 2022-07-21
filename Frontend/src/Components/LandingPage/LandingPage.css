@@ -68,3 +68,24 @@ h3{
     font-size: 1rem;
     line-height: 28px;
 }
+
+.call-to-action button{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 10vw;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    border: none;
+    background-color: #fdedc0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+
+.call-to-action button:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    transform: scale(1.12);
+
+}
