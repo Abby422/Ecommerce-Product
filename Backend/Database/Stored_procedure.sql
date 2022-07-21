@@ -160,8 +160,7 @@ BEGIN
 
 END
 GO
-EXEC pAdmin 3
-
+-- spAdmin 3
 ----End of Create Admin------
 
 
