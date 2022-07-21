@@ -24,5 +24,9 @@ Content-Type: application/json
 
 {
     "email":"testuser6@gmail.com", 
-    "userID": 17
+    "userID": 14
 }
+
+####
+
+GET http://localhost:3000/allProducts
