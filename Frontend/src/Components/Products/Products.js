@@ -1,6 +1,6 @@
 import React from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import './Products.css'
 import {IoCartOutline} from 'react-icons/io5'
 
