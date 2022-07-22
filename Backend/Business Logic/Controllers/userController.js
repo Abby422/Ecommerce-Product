@@ -32,23 +32,15 @@ module.exports = {
         try {
             let pool = await poolPromise()
             pool.request()
-<<<<<<< HEAD
-                .input('UserId', UserId)
-                .input('Quantity', quantity)
-                .input('total', total)
-                .execute(`dbo.CreateOrder`);
-=======
             .input('UserId', UserId)//should be a string
             .input('Quantity', quantity)
             .input('total', total)
             .execute(`dbo.CreateOrder`);
->>>>>>> 5cae264aedc44f76a479e5e48df5ab4e5638f579
 
             pool.request()
                 .input('ProductId', ProductId)
                 .execute(`dbo.EnterProducts`)
                 .then(result => {
-                    // console.log(pool);
                     console.log(result)
                     res.status(200).json({
                         Successful: true,
@@ -99,9 +91,10 @@ module.exports = {
                 .execute('spGetAllProduct');
 
                 getAllProducts.then(result=>{
-                    // console.log(result)
+                    
                     res.status(200).json({
-                        message:result.recordset
+                        message: "Successful",
+                        data:result.recordset
                     })
                 })
         }
@@ -109,4 +102,29 @@ module.exports = {
             console.log(error.message)
         }
     },
+
+    getProductDetails: async (req, res) => {
+        try {
+            let pool = await poolPromise()
+            const {id} = req.params
+
+            pool.request()
+            .input('ProductId', parseInt(id))
+            .execute(`spGetProduct`)
+            .then(result => {
+                if (result.length == 0) {
+                    res.status(404).json({
+                        message: "Not Found, try again later",
+                    })
+                } else {
+                    res.status(200).json({
+                        message: "Successful",
+                        data: result.recordsets[0]
+                    })
+                }
+            })
+        } catch (error) {
+            res.send(error.message)
+        }
+    }
 }
