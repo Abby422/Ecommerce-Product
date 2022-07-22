@@ -1,15 +1,17 @@
 import Footer from './Components/Footer/Footer';
-import LandingPage from './Components/LandingPage/LandingPage';
+import {Provider} from 'react-redux'
+import { Outlet } from 'react-router';
+import store from './redux/store'
 import Navigation from './Components/Navigation/Navigation';
-import Products from './Components/Products/Products';
 
 function App() {
   return (
     <div className="App">
-      <Navigation/>
-      <LandingPage />
-      <Products />
-      <Footer/>
+      <Provider store={store} >
+        <Navigation/>
+        <Outlet />
+        <Footer/>
+      </Provider>
     </div>
   );
 }
