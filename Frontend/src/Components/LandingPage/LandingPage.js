@@ -8,9 +8,11 @@ import { FiTwitter, FiChevronsRight } from "react-icons/fi";
 import ImageOne from "../../Images/Caurosel1.jpg";
 import ImageTwo from "../../Images/Caurosel2.jpg";
 import ImageThree from "../../Images/Caurosel3.jpg";
+import Products from "../Products/Products";
 
 function LandingPage() {
   return (
+    <div className="home-content-container">
     <div className="landing-page-container">
       <div className="landingPage">
         <div className="landing-page-content">
@@ -60,7 +62,9 @@ function LandingPage() {
         <div>
           <GrFacebook />
         </div>
+        </div>
       </div>
+      <Products />
     </div>
   );
 }
