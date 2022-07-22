@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+.home-content-container{
+    display: flex;
+    flex-direction: column;
+}
 .landing-page-container{
     background-color: #E7E4DD;
     display: flex;
