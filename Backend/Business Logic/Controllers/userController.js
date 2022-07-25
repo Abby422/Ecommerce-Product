@@ -85,10 +85,13 @@ module.exports = {
 
     },
     getAllProducts: async (req, res) => {
+        const{pageNumber, rowNumber}= req.body;
         try {
             let pool = await poolPromise()
             const getAllProducts = pool.request()
-                .execute('spGetAllProduct');
+                .input('pageNumber', pageNumber)
+                .input('rowNumber', rowNumber)
+                .execute('spPagination');
 
                 getAllProducts.then(result=>{
                     
