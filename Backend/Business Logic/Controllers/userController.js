@@ -82,7 +82,31 @@ module.exports = {
 
     },
     addProduct: async (req, res) => {
-
+      const{categoryName, productName, productDesc, productImg, productPrice, quantity} = req.body
+      try {
+        let pool = await poolPromise();
+        pool.request()
+        .input('categoryName', categoryName)
+        .input('productName',productName)
+        .input('productDesc', productDesc)
+        .input('productImg',productImg)
+        .input('productPrice',productPrice)
+        .input('quantity',quantity)
+        .execute('spAddProduct').then(result=>{
+            if(result.rowsAffected[0] >0){
+                return res.status(200).json({
+                    message:"Item added successfully"
+                })
+            }else{
+                return res.status(400).json({
+                    message:"Item has not been added"
+                })    
+            }
+        })
+      } catch (error) {
+        console.log(error.message)
+        res.send(error.message)
+      } 
     },
     getAllProducts: async (req, res) => {
         const{pageNumber, rowNumber}= req.body;
