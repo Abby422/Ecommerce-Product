@@ -1,11 +1,11 @@
-POST  http://localhost:5000/register
+POST  http://localhost:5005/register
 Content-Type: application/json
 
  {
-    "userName":"testUser13",
-    "name": "user13",
-    "email":"testuser13@gmail.com",
-    "password":"password13"
+    "userName":"triston",
+    "Name": "badboy",
+    "email":"badboytriston@gmail.com",
+    "password":"tristin"
  }
 
 ####
@@ -13,8 +13,8 @@ POST  http://localhost:3000/login
 Content-Type: application/json
 
  {
-    "email":"yourguyscow@youtu.be",
-    "password":"dCWLVppbYRC1"
+    "email":"badboytriston@gmail.com",
+    "password":"tristin"
  } 
 
 ###

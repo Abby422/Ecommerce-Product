@@ -1,4 +1,5 @@
 import Footer from './Components/Footer/Footer';
+import './App.css'
 import {Provider} from 'react-redux'
 import { Outlet } from 'react-router';
 import store from './redux/store'

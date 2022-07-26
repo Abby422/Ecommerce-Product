@@ -4,12 +4,25 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: [],
     reducers: {
-        cart: (state, {payload}) =>{
+        incart: (state, {payload}) =>{
             return state = payload
         },
+        addItem: (state, {payload}) =>{
+            let cart = [];
+            const product = payload.Product_id
+            const cartItem = cart.find(item => item.Product_id === payload.Product_id? true : false)
 
+            return{
+                ...state,
+                cart : cartItem ?
+                cart.map(item => item.Product_id = payload.Product_id ?
+                    {...item, Quantity: item.Quantity + 1 }: item)
+                    :
+                    [...cart, {...product, Quantity: 1}]
+            }
+        }
     }
 })
 
-export const {cart} = cartSlice.actions
+export const {incart, addItem} = cartSlice.actions
 export default cartSlice.reducer

@@ -3,7 +3,7 @@ const poolPromise = require("../Config/pool");
 
 module.exports = {
     search: async (req, res) => {
-        const { Search } = req.body // need to change to query or body
+        const Search = req.query.query
         try {
             let pool = await poolPromise()
             pool.request()
