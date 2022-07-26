@@ -39,34 +39,18 @@ GO
 -- EXEC dbo.SearchProduct 'Cou'
 
 CREATE OR ALTER PROCEDURE [dbo].[CreateOrder]
-( @UserId INT, @Quantity INT, @total INT)
+(@Order_id VARCHAR(255), @UserId INT, @Json VARCHAR(MAX))
 AS
 BEGIN
-    INSERT INTO Orders(User_Id, Quantity, total) 
-    VALUES ('@UserId', '@Quantity', '@total')
+    INSERT INTO Orders(Order_id,User_Id) 
+    VALUES ('@Order_id', @UserId)
+
+    INSERT INTO OrderDetails (Order_id, Product_id, Quantity, Total)
+    SELECT * FROM
+    OPENJSON(@Json)
+    WITH(Order_id VARCHAR(255), Product_id INT, Quantity INT, Total INT )
 
 END
-GO
-
-EXEC dbo.CreateOrder    2,1,125
-GO
--- SELECT *FROM Orders
--- DELETE 
--- FROM
--- Orders
--- WHERE
--- Order_id = 2
-
-CREATE OR ALTER PROCEDURE [dbo].[EnterProducts]
-( @ProductId INT)
-AS
-BEGIN
-    INSERT INTO Temp_Orders
-    VALUES (@ProductId)
-END
-
-INSERT INTO Temp_Orders ()
-    VALUES (1,2,3)
 GO
 
 
