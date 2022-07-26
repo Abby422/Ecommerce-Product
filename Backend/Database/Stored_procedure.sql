@@ -52,6 +52,16 @@ GO
 -- EXEC dbo.SearchProduct 'Cou'
 
 CREATE OR ALTER PROCEDURE [dbo].[CreateOrder]
+    (
+    @UserId INT,
+    @Quantity INT,
+    @total INT)
+AS
+BEGIN
+    INSERT INTO Orders
+        (User_Id, Quantity, total)
+    VALUES
+        ('@UserId', '@Quantity', '@total')
 
 (@Order_id VARCHAR(255), @UserId INT, @Json VARCHAR(MAX))
 AS
@@ -64,11 +74,42 @@ BEGIN
     OPENJSON(@Json)
     WITH(Order_id VARCHAR(255), Product_id INT, Quantity INT, Total INT )
 
+EXEC dbo.CreateOrder    2,1,125
+GO
+-- SELECT *FROM Orders
+-- DELETE 
+-- FROM
+-- Orders
+-- WHERE
+-- Order_id = 2
+
+CREATE OR ALTER PROCEDURE [dbo].[EnterProducts]
+    (
+    @ProductId INT)
+AS
+BEGIN
+    INSERT INTO Temp_Orders
+    VALUES
+        (@ProductId)
+END
+
+INSERT INTO Temp_Orders ()
+VALUES
+    (1, 2, 3)
 END
 
 GO
 
+-----Get all users ---
 
+CREATE OR ALTER PROC spGetAllUsers
+AS
+BEGIN
+SELECT * FROM Users
+END
+GO
+
+---- End of get all users ----
 
 
 ----Product Count sp------

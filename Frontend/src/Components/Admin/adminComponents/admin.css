@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+/*********************/
+/* Admin default Page*/
+/*********************/
+.adminPage {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+
+
+
+}
+
+.navigation {
+    background-color: blue;
+    padding: 10px;
+    font-size: 15px;
+    height: 100vh;
+    width: 150px;
+    position: relative;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+}
+
+.navigation p {
+    color: white;
+    text-decoration: none;
+}
+
+.navigation Link {
+    text-decoration: none;
+}
+
+.content .navbar {
+    height: 10%;
+    width: 100%;
+    background-color: grey;
+    text-align: end;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+}
+
+.changingContent {
+    position: relative;
+    padding-left: 150px;
+}
+
+
+/****************************/
+/*End of Admin Default Page*/
+/**************************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin dashboard Page*/
+/*********************/
+.dashboard {
+    display: grid;
+    justify-content: center;
+}
+
+.dashboard .title {
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+}
+
+.dashboard .flashcard {
+    text-align: center;
+    width: 50vw;
+    height: 15vw;
+    border: 2px black solid;
+    border-radius: 20px;
+    padding-top: auto;
+    margin: 20px;
+
+}
+
+
+
+/*****************************/
+/*End of Admin dashboard Page*/
+/*****************************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin addProduct Page*/
+/*********************/
+.addProduct{
+
+}
+/*****************************/
+/*End of Admin addProduct Page*/
+/*****************************/

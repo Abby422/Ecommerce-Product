@@ -1,6 +1,11 @@
-GET http://localhost:5000/search/?query=cup
+###
+
+POST http://localhost:5000/search
 Content-Type: application/json
 
+{
+    "Search": "Cup"
+}
 
 ###
 POST http://localhost:5000/checkout
@@ -34,3 +39,16 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/product/4
+#####
+
+POST http://localhost:5000/addProduct
+Content-Type: application/json
+
+{
+   "categoryName":"Bedroom",
+   "productName":"mirror",
+   "productDesc":"Best mirror in town",
+   "productImg":"http://blog.aspneter.com/Images/no-thumb.jpg",
+   "productPrice":"1399",
+   "quantity":"40"
+}
