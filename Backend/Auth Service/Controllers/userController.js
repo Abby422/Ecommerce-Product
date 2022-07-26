@@ -2,6 +2,8 @@ const poolPromise = require("../Config/pool");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const amqp = require('amqplib')
+require('dotenv').config()
+
 //TOKEN = 2a$04$KcqhuNgF9kO
 
 const userControllers = {
@@ -17,7 +19,7 @@ const userControllers = {
       .input('userName', userName)
       .input('email', email)
       .input('name', name)
-      .input('password', password)
+      .input('password', hashedPwd)
       .execute(`dbo.RegisterUser`)
       if (insertQry) {
         const token = jwt.sign({ email: email }, process.env.TOKEN, {
@@ -29,31 +31,7 @@ const userControllers = {
           message: "user added",
           token: token,
         });
-        try {
-          async function connect() {
-            const amqpServer = "amqp://localhost:15672";
-              connection = await amqp.connect(amqpServer);
-             channel = await connection.createChannel();
-            await channel.assertQueue("registrationDetails");
-          }
-          connect();
-          channel.sendToQueue(
-            "registrationDetails",
-            Buffer.from(
-                JSON.stringify({
-                    name,
-                    email,
-                })
-            )
-        )
-         channel.assertQueue("registrationDetails");      
-         channel.consume("registrationDetails", (data)=>{
-          console.log(JSON.parse(data.content))
-          channel.ack(data)
-        })
-        } catch (error) {
-          console.log(error.message)
-        }
+     
       }
     } catch (error) {
       if (

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 // const adminAuth = require("../../Middlewares/adminMiddleware");
-const { search, order,setAdmin, getAllProducts, getProductDetails, addProduct } = require('../Controllers/userController');
+const { search, order,setAdmin, getAllProducts, getProductDetails, addProduct } = require('../Controllers/productsController');
 
 router.get('/search', search)
 router.post('/checkout', order)

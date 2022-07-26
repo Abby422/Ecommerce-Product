@@ -7,8 +7,8 @@ const SetAdmin = () => {
 
 
  useEffect(()=>{
-     axios.get('http://localhost:6000/getAllUsers')
-    .then((res)=>console.log(res.data.data))
+     axios.get('http://localhost:7000/getAllUsers')
+    .then((res)=>console.log(res.data))
  })
     
 
