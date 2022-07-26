@@ -13,6 +13,9 @@ import AddProduct from './Components/Admin/adminComponents/addProduct';
 import UpdateProduct from './Components/Admin/adminComponents/updateProduct';
 import DeleteProduct from './Components/Admin/adminComponents/deleteProduct';
 import SetAdmin from './Components/Admin/adminComponents/setAdmin';
+import Search from './Components/Search/Search';
+import Register from './Components/Register/Register';
+import Login from './Components/Login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,8 +24,11 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<LandingPage />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/:productId' element={<ProductDetail />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/search/:search' element={<Search />} />
         </Route>
         <Route path='/adminLogin' element={<Adminlogin />} />
         <Route path='/admin' element={<AdminPage />} >

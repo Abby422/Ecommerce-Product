@@ -1,4 +1,4 @@
-const poolPromise = require("../config/pool");
+const poolPromise = require("../Config/pool");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const amqp = require('amqplib')
@@ -157,6 +157,22 @@ const userControllers = {
       }
     }
   },
+  getAllUsers : async(req, res)=>{
+      try {
+        let pool = await poolPromise()
+        pool.request()
+        .execute(`spGetAllUsers`)
+        .then(result=>{
+              res.status(200).json({
+                data: result.recordset
+              })
+        }) 
+      } catch (error) {
+        console.log(error.message)
+        res.send(error.message)
+      }
+  }
+
 };
 
 module.exports = { ...userControllers };
