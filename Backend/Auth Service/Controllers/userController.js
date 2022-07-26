@@ -6,17 +6,15 @@ const amqp = require('amqplib')
 
 const userControllers = {
   Register: async (req, res) => {
-    const { userName, email, name, password } = req.body;
-    let channel;
+    const { userName, email, Name, password } = req.body;
 
     try {
       let pool = await poolPromise();
       const hashedPwd = await bcrypt.hash(password, 1);
-      console.log(hashedPwd);
       let insertQry = await pool.request()
       .input('userName', userName)
       .input('email', email)
-      .input('name', name)
+      .input('name', Name)
       .input('password', password)
       .execute(`dbo.RegisterUser`)
       if (insertQry) {
@@ -29,31 +27,31 @@ const userControllers = {
           message: "user added",
           token: token,
         });
-        try {
-          async function connect() {
-            const amqpServer = "amqp://localhost:15672";
-              connection = await amqp.connect(amqpServer);
-             channel = await connection.createChannel();
-            await channel.assertQueue("registrationDetails");
-          }
-          connect();
-          channel.sendToQueue(
-            "registrationDetails",
-            Buffer.from(
-                JSON.stringify({
-                    name,
-                    email,
-                })
-            )
-        )
-         channel.assertQueue("registrationDetails");      
-         channel.consume("registrationDetails", (data)=>{
-          console.log(JSON.parse(data.content))
-          channel.ack(data)
-        })
-        } catch (error) {
-          console.log(error.message)
-        }
+        // try {
+        //   async function connect() {
+        //     const amqpServer = "amqp://localhost:15672";
+        //       connection = await amqp.connect(amqpServer);
+        //      channel = await connection.createChannel();
+        //     await channel.assertQueue("registrationDetails");
+        //   }
+        //   connect();
+        //   channel.sendToQueue(
+        //     "registrationDetails",
+        //     Buffer.from(
+        //         JSON.stringify({
+        //             name,
+        //             email,
+        //         })
+        //     )
+        // )
+        //  channel.assertQueue("registrationDetails");      
+        //  channel.consume("registrationDetails", (data)=>{
+        //   console.log(JSON.parse(data.content))
+        //   channel.ack(data)
+        // })
+        // } catch (error) {
+        //   console.log(error.message)
+        // }
       }
     } catch (error) {
       if (
