@@ -1,11 +1,6 @@
-###
-
-POST http://localhost:5000/search
+GET http://localhost:5000/search/?query=cup
 Content-Type: application/json
 
-{
-    "Search": "Cup"
-}
 
 ###
 POST http://localhost:5000/checkout

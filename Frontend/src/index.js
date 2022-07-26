@@ -7,6 +7,9 @@ import Adminlogin from './Components/Admin/adminLogin';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
 import LandingPage from './Components/LandingPage/LandingPage';
 import Cart from './Components/Cart/Cart';
+import Search from './Components/Search/Search';
+import Register from './Components/Register/Register';
+import Login from './Components/Login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,8 +18,11 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<LandingPage />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/:productId' element={<ProductDetail />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/search/:search' element={<Search />} />
         </Route>
         <Route path='/admin' element={<Adminlogin />} />
       </Routes>
