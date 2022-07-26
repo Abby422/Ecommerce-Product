@@ -24,7 +24,7 @@ const AddProduct = () => {
             quantity:quantity
         }
 
-        await axios.post(`http://localhost:5000/addProduct`, product ,{headers: { "Content-type": "application/json" }})
+        await axios.post(`http://localhost:5000/addProduct`, {...product})
         .then(res=>{
             console.log(res)
             console.log(res.data)
@@ -38,7 +38,7 @@ const AddProduct = () => {
         <div className="addProduct">
             <p>Add Product</p>
             <div className="addProductForm">
-                <form onSubmit={()=>handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <label>
                         category:
                         <select value={category} onChange={(e)=>setCategory(e.target.value)}>
@@ -70,7 +70,7 @@ const AddProduct = () => {
                         <input type="text" value={quantity} onChange={(e)=>setQuantity(e.target.value)} />
                     </label><br />
 
-                    <input type="submit" value="submit" />
+                    <button type="submit">submit</button>
                 </form>
             </div>
         </div>
