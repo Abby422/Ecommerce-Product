@@ -1,18 +1,23 @@
 import React, {useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux/es/exports'
+import { useParams } from 'react-router'
+import './Search.css'
 import axios from 'axios'
-import './Products.css'
+import { useDispatch, useSelector } from 'react-redux/es/exports'
 import { allProducts } from '../../redux/slices/productReducers'
 import Product from '../Product/Product'
 
-const ProductUrl = 'http://localhost:5000/allProducts'
-function Products() {
+
+function Search() {
+    const params = useParams()
+    const searchData = params
+    const search = searchData.search
     const dispatch = useDispatch()
     const shopProducts = useSelector(state => state.products)
-
+    console.log(search)
     useEffect(() =>{
-        axios.get(ProductUrl).then(res => dispatch(allProducts(res.data.data)))
-    }, [])
+        axios.get(`http://localhost:5000/search/?query=${search}`).then(res => dispatch(allProducts(res.data.Data)))
+    }, [search])
+
   return (
     <div className='products_container'>
         <div><h2>SHOP</h2></div>
@@ -29,5 +34,4 @@ function Products() {
   )
 }
 
-export default Products
-
+export default Search

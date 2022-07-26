@@ -63,8 +63,16 @@ BEGIN
     VALUES
         ('@UserId', '@Quantity', '@total')
 
-END
-GO
+(@Order_id VARCHAR(255), @UserId INT, @Json VARCHAR(MAX))
+AS
+BEGIN
+    INSERT INTO Orders(Order_id,User_Id) 
+    VALUES ('@Order_id', @UserId)
+
+    INSERT INTO OrderDetails (Order_id, Product_id, Quantity, Total)
+    SELECT * FROM
+    OPENJSON(@Json)
+    WITH(Order_id VARCHAR(255), Product_id INT, Quantity INT, Total INT )
 
 EXEC dbo.CreateOrder    2,1,125
 GO
@@ -88,9 +96,20 @@ END
 INSERT INTO Temp_Orders ()
 VALUES
     (1, 2, 3)
+END
+
 GO
 
+-----Get all users ---
 
+CREATE OR ALTER PROC spGetAllUsers
+AS
+BEGIN
+SELECT * FROM Users
+END
+GO
+
+---- End of get all users ----
 
 
 ----Product Count sp------

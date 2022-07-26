@@ -5,14 +5,14 @@ const AddProduct = () => {
 
  
 
-    const { category, setCategory } = useState('Kitchen and Dining');
-    const{desc, setDesc} = useState('')
-    const{img, setImg}=useState('')
-    const{price, setPrice}= useState(0)
-    const{quantity, setQuantity}=useState(0)
-    const {name, setName}= useState('')
+    const [category, setCategory ] = useState('Kitchen and Dining');
+    const[desc, setDesc] = useState('')
+    const[img, setImg]=useState('')
+    const[price, setPrice]= useState(0)
+    const[quantity, setQuantity]=useState(0)
+    const [name, setName]= useState('')
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
 
         const product ={
@@ -24,7 +24,7 @@ const AddProduct = () => {
             quantity:quantity
         }
 
-        axios.post(`http://localhost:5000/addProduct`,{product})
+        await axios.post(`http://localhost:5000/addProduct`, product ,{headers: { "Content-type": "application/json" }})
         .then(res=>{
             console.log(res)
             console.log(res.data)
@@ -32,24 +32,7 @@ const AddProduct = () => {
         console.log(product)
     }
 
-    const categoryChange = (e) => {
-        setCategory(e.target.value)
-    }
-    const nameChange = (e)=>{
-        setName(e.target.value)
-    }
-    const descChange = (e)=>{
-        setDesc(e.target.value)
-    }
-    const imgChange = (e)=>{
-        setImg(e.target.value)
-    }
-    const priceChange = (e)=>{
-        setPrice(e.target.value)
-    }
-    const quanityChange =(e)=>{
-        setQuantity(e.target.value)
-    }
+
 
     return (
         <div className="addProduct">
@@ -58,7 +41,7 @@ const AddProduct = () => {
                 <form onSubmit={()=>handleSubmit}>
                     <label>
                         category:
-                        <select value={category} onChange={()=>categoryChange}>
+                        <select value={category} onChange={(e)=>setCategory(e.target.value)}>
                             <option value="Kitchen and Dining">Kitchen and Dining</option>
                             <option value="Living Room">Living Room</option>
                             <option value="Bedroom">Bedroom</option>
@@ -68,23 +51,23 @@ const AddProduct = () => {
                     <label>
                         Product Name:
                         <input type="text"
-                        autoComplete="off" value={name} onChange={()=>nameChange} />
+                        autoComplete="off" value={name} onChange={(e)=>setName(e.target.value)} />
                     </label><br />
                     <label>
                         Product Description: <br />
-                        <textarea value={desc} onChange={()=>descChange} cols="30" rows="10" />
+                        <textarea value={desc} onChange={(e)=>setDesc(e.target.value)} cols="30" rows="10" />
                     </label><br />
                     <label>
                         Image Link:
-                        <input type="text" value={img} onChange={()=>imgChange} />
+                        <input type="text" value={img} onChange={(e)=>setImg(e.target.value)} />
                     </label><br />
                     <label >
                         Product price:
-                        <input type="text" value={price} onChange={()=>priceChange}/>
+                        <input type="text" value={price} onChange={(e)=>setPrice(e.target.value)}/>
                     </label><br />
                     <label>
                         quantity:
-                        <input type="text" value={quantity} onChange={()=>quanityChange} />
+                        <input type="text" value={quantity} onChange={(e)=>setQuantity(e.target.value)} />
                     </label><br />
 
                     <input type="submit" value="submit" />
