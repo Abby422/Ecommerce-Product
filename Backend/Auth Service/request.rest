@@ -26,3 +26,7 @@ Content-Type: application/json
     "Name": "Love",
     "email":"yourguyscow@youtu.be"
  } 
+
+ ####
+ 
+ GET http://localhost:6000/getAllUsers

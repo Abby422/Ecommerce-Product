@@ -1,4 +1,4 @@
-const poolPromise = require("../config/pool");
+const poolPromise = require("../Config/pool");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const amqp = require('amqplib')
@@ -6,15 +6,17 @@ const amqp = require('amqplib')
 
 const userControllers = {
   Register: async (req, res) => {
-    const { userName, email, Name, password } = req.body;
+    const { userName, email, name, password } = req.body;
+    let channel;
 
     try {
       let pool = await poolPromise();
       const hashedPwd = await bcrypt.hash(password, 1);
+      console.log(hashedPwd);
       let insertQry = await pool.request()
       .input('userName', userName)
       .input('email', email)
-      .input('name', Name)
+      .input('name', name)
       .input('password', password)
       .execute(`dbo.RegisterUser`)
       if (insertQry) {
@@ -27,31 +29,31 @@ const userControllers = {
           message: "user added",
           token: token,
         });
-        // try {
-        //   async function connect() {
-        //     const amqpServer = "amqp://localhost:15672";
-        //       connection = await amqp.connect(amqpServer);
-        //      channel = await connection.createChannel();
-        //     await channel.assertQueue("registrationDetails");
-        //   }
-        //   connect();
-        //   channel.sendToQueue(
-        //     "registrationDetails",
-        //     Buffer.from(
-        //         JSON.stringify({
-        //             name,
-        //             email,
-        //         })
-        //     )
-        // )
-        //  channel.assertQueue("registrationDetails");      
-        //  channel.consume("registrationDetails", (data)=>{
-        //   console.log(JSON.parse(data.content))
-        //   channel.ack(data)
-        // })
-        // } catch (error) {
-        //   console.log(error.message)
-        // }
+        try {
+          async function connect() {
+            const amqpServer = "amqp://localhost:15672";
+              connection = await amqp.connect(amqpServer);
+             channel = await connection.createChannel();
+            await channel.assertQueue("registrationDetails");
+          }
+          connect();
+          channel.sendToQueue(
+            "registrationDetails",
+            Buffer.from(
+                JSON.stringify({
+                    name,
+                    email,
+                })
+            )
+        )
+         channel.assertQueue("registrationDetails");      
+         channel.consume("registrationDetails", (data)=>{
+          console.log(JSON.parse(data.content))
+          channel.ack(data)
+        })
+        } catch (error) {
+          console.log(error.message)
+        }
       }
     } catch (error) {
       if (
@@ -155,6 +157,22 @@ const userControllers = {
       }
     }
   },
+  getAllUsers : async(req, res)=>{
+      try {
+        let pool = await poolPromise()
+        pool.request()
+        .execute(`spGetAllUsers`)
+        .then(result=>{
+              res.status(200).json({
+                data: result.recordset
+              })
+        }) 
+      } catch (error) {
+        console.log(error.message)
+        res.send(error.message)
+      }
+  }
+
 };
 
 module.exports = { ...userControllers };
