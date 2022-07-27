@@ -25,12 +25,13 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<LandingPage />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
           <Route path='/:productId' element={<ProductDetail />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/search/:search' element={<Search />} />
         </Route>
+
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/adminLogin' element={<Adminlogin />} />
         <Route path='/admin' element={<AdminPage />} >
           <Route index element={<Dashboard />} />
@@ -41,8 +42,6 @@ root.render(
           <Route path='/admin/setAdmin' element={<SetAdmin />} />
           <Route path='/admin/updateProduct/:id' element={<ProductsUpdate />}/>
         </Route>
-
-      </Routes>a
     </Router>
 
   </React.StrictMode>
