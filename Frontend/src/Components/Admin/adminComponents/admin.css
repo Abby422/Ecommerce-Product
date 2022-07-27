@@ -41,7 +41,7 @@
 }
 
 .content .navbar {
-    height: 10%;
+    height: 70px;
     width: 100%;
     background-color: grey;
     text-align: end;
@@ -51,9 +51,18 @@
 
 }
 
+.content .navbar p{
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
 .changingContent {
     position: relative;
     padding-left: 150px;
+    background-image: url("../Images/white-background.jpg");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 
@@ -71,25 +80,47 @@
 .dashboard {
     display: grid;
     justify-content: center;
+    width: 100%;
+}
+.dashboard .title p{
+    color:gray;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
 }
 
 .dashboard .title {
-    font-weight: bolder;
     width: 100%;
-    text-align: center;
+    display: grid;
+    justify-content: center;
 }
+.dashboard .flashcards{
+    display: grid;
+    width: 100%;
+    justify-content: space-around;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    margin-top: 100px;
 
+}
 .dashboard .flashcard {
     text-align: center;
-    width: 50vw;
-    height: 15vw;
+    background-color: white;
+    width: 350px;
+    height: 200px;
     border: 2px black solid;
-    border-radius: 20px;
-    padding-top: auto;
+    border-radius: 15px;
+    box-shadow: 3px 6px 15px 5px rgba(0,0,0,0.57);
+    padding: auto;
+    margin-bottom: 20px;
     margin: 20px;
-
 }
 
+@media only screen and (max-width: 1000px) {
+    .dashboard .flashcards {
+      grid-template-columns: 1fr ;
+    }
+  }
 
 
 /*****************************/
@@ -104,8 +135,116 @@
 /* Admin addProduct Page*/
 /*********************/
 .addProduct{
-
+ display: grid;
+ justify-content: center;
+ align-items: center;
+}
+.addProduct p{
+    color:gray;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.addProduct .title{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+.addProductForm{
+    display: grid;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-top: 50px;
+    margin-top: 30px;
+    background-color: white;
+    width: 60vw;
+    justify-content: center;
+    font-size: 1.3rem;
+    padding-bottom: 50px;
 }
 /*****************************/
 /*End of Admin addProduct Page*/
 /*****************************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin update Product Page*/
+/*********************/
+.updateProduct{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+   }
+   .updateProduct p{
+       color:gray;
+       margin-left: 50px;
+       font-weight: bold;
+       font-size: 2rem;
+   }
+   .updateProduct .title{
+       width: 100%;
+       display: grid;
+       justify-content: center;
+   }
+
+    .updateProduct table {
+    border-collapse: collapse;
+    border-radius: 20px;
+  }
+  
+    .updateProduct td, th ,Link{
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: left;
+    border-radius: 20px;
+  }
+
+  .updateProduct .td1{
+    border: none;
+  }
+
+
+
+
+/*********************/
+/* End of Admin update Product Page*/
+/*********************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin set Admin Page*/
+/*********************/
+
+.setAdmin .title{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+.setAdmin .title p{
+    color:gray;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.setAdmin table {
+    border-collapse: collapse;
+    border-radius: 20px;
+  }
+  
+  .setAdmin td, th, Link{
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: left;
+    border-radius: 20px;
+  }
+
+  /*********************/
+/* End of Admin set admin Page*/
+/*********************/

@@ -36,7 +36,9 @@ const AddProduct = () => {
 
     return (
         <div className="addProduct">
-            <p>Add Product</p>
+            <div className="title">
+            <p >Add Product</p>
+            </div>
             <div className="addProductForm">
                 <form onSubmit={handleSubmit}>
                     <label>
@@ -55,7 +57,7 @@ const AddProduct = () => {
                     </label><br />
                     <label>
                         Product Description: <br />
-                        <textarea value={desc} onChange={(e)=>setDesc(e.target.value)} cols="30" rows="10" />
+                        <textarea value={desc} onChange={(e)=>setDesc(e.target.value)} cols="50" rows="8" />
                     </label><br />
                     <label>
                         Image Link:

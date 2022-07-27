@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 // const adminAuth = require("../../Middlewares/adminMiddleware");
-const { search, order,setAdmin, getAllProducts, getProductDetails, addProduct } = require('../Controllers/productsController');
+const { search, order,setAdmin, getAllProducts, getProductDetails, addProduct, getAdminProducts, updateProduct } = require('../Controllers/productsController');
 
 router.get('/search', search)
 router.post('/checkout', order)
@@ -9,5 +9,8 @@ router.post('/checkout', order)
 router.post('/allProducts', getAllProducts)
 router.get('/product/:id', getProductDetails)
 router.post('/addProduct', addProduct)
+router.post('/setAdmin', setAdmin)
+router.get('/adminProducts', getAdminProducts)
+router.post('/updateProduct', updateProduct)
 
 module.exports = { router }

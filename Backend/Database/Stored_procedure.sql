@@ -101,13 +101,12 @@ END
 GO
 
 -----Get all users ---
-
-CREATE OR ALTER PROC spGetAllUsers
-AS
-BEGIN
-SELECT * FROM Users
-END
-GO
+ CREATE OR ALTER PROC spGetAllUsers
+ AS
+ BEGIN
+    SELECT User_Id, Email, Name, IsDeleted, User_role FROM Users  
+ END
+ GO
 
 ---- End of get all users ----
 
@@ -203,12 +202,13 @@ GO
 
 -----Create Admin -----
 CREATE OR ALTER PROC spAdmin(
-    @userID INT
+    @userID INT,
+    @role VARCHAR(255)
 )
 AS
 BEGIN
     UPDATE Users
-    SET User_role = 'Admin'
+    SET User_role = @role
     WHERE User_Id = @userID
 
 END
@@ -232,9 +232,22 @@ END
 
   EXEC spPagination  
 EXEC spPagination 2
-
+GO  
 
 ----End of pagination-----
+CREATE OR ALTER PROC spGetAdminProducts
+AS 
+BEGIN
+    SELECT *FROM Product
+END 
+GO
+
+-----Admin Get product-----
+
+
+
+
+-----End of admin product----
 
 
 
