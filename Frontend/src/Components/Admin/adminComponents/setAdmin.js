@@ -16,19 +16,11 @@ const SetAdmin = () => {
     console.log(data)
 
 
-<<<<<<< HEAD
     useEffect(()=>{
         let user={
             userID:id,
             role:role
         }
-=======
- useEffect(()=>{
-     axios.get('http://localhost:7000/getAllUsers')
-    .then((res)=>console.log(res.data))
- })
-    
->>>>>>> 1b23419c084a04dae47fb83705ac8c801a2e173b
 
         axios.post(`http://localhost:5000/setAdmin`, {...user})
         .then(res=>{
