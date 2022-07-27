@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 
 const ProductsUpdate = () => {
-  const [products, setProducts] = useState([])
   const [product, setProduct] = useState([])
   const [name, setName] = useState('')
   const [desc, setDesc] = useState('')
@@ -11,16 +10,15 @@ const ProductsUpdate = () => {
   const [price, setPrice] = useState('')
   const [discount, setDiscount] = useState('')
   const { id } = useParams();
-  var index = id - 1;
+
 
   
   useEffect(() => {
-    axios.get(`http://localhost:5000/adminProducts`)
-    .then(res => setProducts(res.data.data))
-  }, [])
+    axios.get(`http://localhost:5000/getOneProduct/${id}`)
+    .then(res => setProduct(res.data.data))
+  }, [id])
   
-  setProduct(products[index])
-  console.log(product)
+
 
   // console.log(products[0])
   // console.log(id)
@@ -49,10 +47,11 @@ const ProductsUpdate = () => {
     <div className='productUpdate'>
       <div className="title">
         <p>Update Products</p>
+        <p>{id}</p>
       </div>
       <div className="form">
-        {/* <form onSubmit={handleSubmit}>
-          <img src={product[n].Product_image} alt="" width="300px" height="200px" /> <br /> <br />
+        <form onSubmit={handleSubmit}>
+          <img src={product.Product_image} alt="" width="300px" height="200px" /> <br /> <br />
           <label>
             Name:
             <input type="text" value={product.Product_name} onChange={(e) => setName(e.target.value)} />
@@ -74,7 +73,7 @@ const ProductsUpdate = () => {
             <input type="text" value={product.Discount} onChange={(e) => setDiscount(e.target.value)} />
           </label> <br />
           <button type="submit">submit</button>
-        </form> */}
+        </form>
       </div>
 
 

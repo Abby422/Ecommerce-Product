@@ -67,3 +67,7 @@ Content-Type: application/json
    "quantity":40,
    "discount":12 
 }
+
+#####
+
+GET http://localhost:5000/getOneProduct/4
