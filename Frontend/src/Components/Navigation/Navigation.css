@@ -60,3 +60,14 @@
 .cart-icon{
     margin-right: 20px;
 }
+.cart-count{
+    position: absolute;
+    top: -10px;
+    width: fit-content;
+    height: fit-content;
+    right: -130px;
+    font-size: 1.2rem;
+    color: black;
+    font-weight: 700;
+    border-radius: 5px;
+}
