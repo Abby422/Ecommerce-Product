@@ -23,8 +23,8 @@ POST http://localhost:5000/setAdmin
 Content-Type: application/json
 
 {
-    "email":"testuser6@gmail.com", 
-    "userID": 14
+    "userID": 1,
+    "role":"User"
 }
 
 ####
@@ -51,4 +51,19 @@ Content-Type: application/json
    "productImg":"http://blog.aspneter.com/Images/no-thumb.jpg",
    "productPrice":"1399",
    "quantity":"40"
+}
+####
+GET http://localhost:5000/adminProducts
+
+####
+POST http://localhost:5000/updateProduct
+Content-Type: application/json
+
+{
+   "id":"2",
+   "name":"book",
+   "desc":"changed description",
+   "price":23,
+   "quantity":40,
+   "discount":12 
 }
