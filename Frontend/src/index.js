@@ -18,12 +18,12 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<LandingPage />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
           <Route path='/:productId' element={<ProductDetail />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/search/:search' element={<Search />} />
         </Route>
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/admin' element={<Adminlogin />} />
       </Routes>
     </Router>

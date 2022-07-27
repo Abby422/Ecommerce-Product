@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Italiana', serif;
 }
 
 .products_container{
@@ -15,6 +14,7 @@
     justify-content: center;
     background: rgb(227,226,225);
     background: linear-gradient(150deg, rgba(227,226,225,1) 0%, rgba(240,232,208,1) 65%, rgba(247,234,205,1) 100%);
+    font-family: 'Italiana', serif;
 }    
 .products{
     display: flex;
