@@ -210,5 +210,29 @@ module.exports = {
             console.log(error.message)
             res.send(error.message)
         }
+    },
+    getOneProduct: async(req,res)=>{
+        const{id}=req.params
+        try {
+            let pool = await poolPromise()
+            pool.request()
+             .input('productID', id)
+             .execute('spOneProduct')
+             .then(result=>{
+                console.log(result)
+                if(result.recordset.length > 0){
+                    res.status(200).json({
+                        data:result.recordset[0]
+                    })
+                }else{
+                    res.status(400).json({
+                        message:"Product doesn't exist"
+                    })
+                }
+             })
+        } catch (error) {
+            console.log(error.message)
+
+        }
     }
 }

@@ -235,21 +235,30 @@ EXEC spPagination 2
 GO  
 
 ----End of pagination-----
+
+
+-----Admin Get product-----
+
 CREATE OR ALTER PROC spGetAdminProducts
 AS 
 BEGIN
     SELECT *FROM Product
 END 
 GO
-
------Admin Get product-----
-
-
-
-
 -----End of admin product----
 
+----Get Product by id -----
+CREATE OR ALTER PROC spOneProduct(
+    @productID  INT
+)
+AS 
+BEGIN
+    SELECT *FROM Product WHERE Product_id = @productID
+END 
+GO
 
+EXEC spOneProduct 2
+-----End of get product by id---
 
 
 ----- http://blog.aspneter.com/Images/no-thumb.jpg ------
