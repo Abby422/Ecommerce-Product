@@ -1,6 +1,11 @@
-GET http://localhost:5000/search/?query=cup
+###
+
+POST http://localhost:5000/search
 Content-Type: application/json
 
+{
+    "Search": "Cup"
+}
 
 ###
 POST http://localhost:5000/checkout
@@ -18,13 +23,47 @@ POST http://localhost:5000/setAdmin
 Content-Type: application/json
 
 {
-    "email":"testuser6@gmail.com", 
-    "userID": 14
+    "userID": 1,
+    "role":"User"
 }
 
 ####
 
-GET http://localhost:5000/allProducts
+POST http://localhost:5000/allProducts
+Content-Type: application/json
+
+{
+    "pageNumber":1,
+    "rowNumber":5
+}
 
 ###
 GET http://localhost:5000/product/4
+#####
+
+POST http://localhost:5000/addProduct
+Content-Type: application/json
+
+{
+   "categoryName":"Bedroom",
+   "productName":"mirror",
+   "productDesc":"Best mirror in town",
+   "productImg":"http://blog.aspneter.com/Images/no-thumb.jpg",
+   "productPrice":"1399",
+   "quantity":"40"
+}
+####
+GET http://localhost:5000/adminProducts
+
+####
+POST http://localhost:5000/updateProduct
+Content-Type: application/json
+
+{
+   "id":"2",
+   "name":"book",
+   "desc":"changed description",
+   "price":23,
+   "quantity":40,
+   "discount":12 
+}
