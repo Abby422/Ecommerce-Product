@@ -32,9 +32,7 @@ function Register() {
     console.log(values);
 
     await axios
-      .post(`http://localhost:5005/register`, values, {
-        headers: { "Content-type": "application/json" },
-      })
+      .post(`http://localhost:7000/register`, values, {headers: { "Content-type": "application/json" },})
       .then((res) => {
         dispatch(users(res.data));
         handleMessage(user);
