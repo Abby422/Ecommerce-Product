@@ -2,13 +2,13 @@ import { useParams } from "react-router";
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 
-const ProductsUpdate = () => {
+const ProductUpdate = () => {
   const [product, setProduct] = useState([])
-  const [name, setName] = useState('')
-  const [desc, setDesc] = useState('')
-  const [quantity, setQuantity] = useState('')
-  const [price, setPrice] = useState('')
-  const [discount, setDiscount] = useState('')
+  const [name, setName] = useState()
+  const [desc, setDesc] = useState()
+  const [quantity, setQuantity] = useState()
+  const [price, setPrice] = useState()
+  const [discount, setDiscount] = useState()
   const { id } = useParams();
 
 
@@ -16,12 +16,14 @@ const ProductsUpdate = () => {
   useEffect(() => {
     axios.get(`http://localhost:5000/getOneProduct/${id}`)
     .then(res => setProduct(res.data.data))
-  }, [id])
+    setName(product.Product_name)
+    setDesc(product.Product_description)
+    setQuantity(product.Quantity)
+    setPrice(product.Product_price)
+    setDiscount(product.Discount)
+  },[id, product.Product_name, product.Product_description, product.Quantity, product.Product_price, product.Discount])
   
 
-
-  // console.log(products[0])
-  // console.log(id)
 
   const handleSubmit = async () => {
     let updatedProduct = {
@@ -40,9 +42,6 @@ const ProductsUpdate = () => {
     console.log(updatedProduct)
   }
 
-
-
-
   return (
     <div className='productUpdate'>
       <div className="title">
@@ -54,23 +53,23 @@ const ProductsUpdate = () => {
           <img src={product.Product_image} alt="" width="300px" height="200px" /> <br /> <br />
           <label>
             Name:
-            <input type="text" value={product.Product_name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" value={name || ''} onChange={(e) => setName(e.target.value)} />
           </label> <br /> <br />
           <label >
             Description: <br />
-            <textarea value={product.Product_description} onChange={(e) => setDesc(e.target.value)} cols="50" rows="8" />
+            <textarea value={desc || ''} onChange={(e) => setDesc(e.target.value)} cols="50" rows="8" />
           </label> <br /> <br />
           <label>
             Quantity:
-            <input type="text" value={product.Quantity} onChange={(e) => setQuantity(e.target.value)} />
+            <input type="text" value={quantity || ''} onChange={(e) => setQuantity(e.target.value)} />
           </label> <br /> <br />
           <label>
             Price:
-            <input type="text" value={product.Product_price} onChange={(e) => setPrice(e.target.value)} />
+            <input type="text" value={price || ''} onChange={(e) => setPrice(e.target.value)} />
           </label> <br /> <br />
           <label>
             Discount:
-            <input type="text" value={product.Discount} onChange={(e) => setDiscount(e.target.value)} />
+            <input type="text" value={discount || ''} onChange={(e) => setDiscount(e.target.value)} />
           </label> <br />
           <button type="submit">submit</button>
         </form>
@@ -80,4 +79,4 @@ const ProductsUpdate = () => {
     </div>
   )
 }
-export default ProductsUpdate;
+export default ProductUpdate;
