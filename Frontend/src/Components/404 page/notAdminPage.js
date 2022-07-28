@@ -1,7 +1,7 @@
 const NotAdminPage = () => {
     return (
         <div className="notAdmin">
-            <p>Resouces not available since your are not an admin</p>
+            <h1>Resouces not available since your are not an admin</h1>
         </div>
     );
 }
