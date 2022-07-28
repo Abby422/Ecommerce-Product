@@ -12,5 +12,6 @@ router.post('/addProduct', addProduct)
 router.post('/setAdmin', setAdmin)
 router.get('/adminProducts', getAdminProducts)
 router.post('/updateProduct', updateProduct)
+router.get('/getOneProduct/:id', getOneProduct)
 
 module.exports = { router }
