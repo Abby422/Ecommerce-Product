@@ -9,6 +9,7 @@ import ImageOne from "../../Images/Caurosel1.jpg";
 import ImageTwo from "../../Images/Caurosel2.jpg";
 import ImageThree from "../../Images/Caurosel3.jpg";
 import Products from "../Products/Products";
+import {Link} from 'react-router-dom'
 
 function LandingPage() {
   return (
@@ -31,8 +32,9 @@ function LandingPage() {
               home decor budget to the next level.
             </h3>
           </div>
+          
           <div className="call-to-action">
-            <button>Sign up <FiChevronsRight /></button>
+            <Link to={`/register`}></Link>Sign up <FiChevronsRight />
           </div>
         </div>
       </div>

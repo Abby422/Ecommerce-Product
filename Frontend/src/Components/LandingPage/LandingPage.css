@@ -73,7 +73,7 @@ h3{
     line-height: 28px;
 }
 
-.call-to-action button{
+.call-to-action {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -87,7 +87,7 @@ h3{
     border-radius: 10px;
 }
 
-.call-to-action button:hover{
+.call-to-action:hover{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     transform: scale(1.12);
