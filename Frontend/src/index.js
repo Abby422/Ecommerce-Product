@@ -42,6 +42,7 @@ root.render(
           <Route path='/admin/setAdmin' element={<SetAdmin />} />
           <Route path='/admin/updateProduct/:id' element={<ProductsUpdate />}/>
         </Route>
+        </Routes>
     </Router>
 
   </React.StrictMode>
