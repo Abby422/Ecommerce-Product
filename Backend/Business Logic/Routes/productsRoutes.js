@@ -1,8 +1,12 @@
 const router = require('express').Router();
 
 // const adminAuth = require("../../Middlewares/adminMiddleware");
+
 const { search, order, getAllProducts, getProductDetails} = require('../Controllers/productsController');
 const{setAdmin, addProduct, getAdminProducts, updateProduct, getOneProduct, deleteProduct }=require('../Controllers/adminController')
+
+
+
 router.get('/search', search)
 router.post('/checkout', order)
 // router.post('/setAdmin', adminAuth, setAdmin)

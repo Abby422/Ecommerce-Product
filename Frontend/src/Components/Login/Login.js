@@ -34,7 +34,7 @@ function Login() {
 
     await axios
       .post(
-        `http://localhost:5005/login`,
+        `http://localhost:7000/login`,
         { email, password },
         { headers: { "Content-type": "application/json" } }
       )

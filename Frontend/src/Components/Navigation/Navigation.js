@@ -22,7 +22,7 @@ function Navigation() {
             <input type='search'name='searchBar' onChange={e =>{setSearch(e.target.value)}} />
             <Link to={`/search/${search}`} style={style}><div className='search-icon'><IoSearchOutline /></div></Link>
             <div className='profile' style={style}><CgProfile /></div>
-            <Link to={`/cart`} style={style}><div className='cart-icon'><IoCartOutline /><div className='cart-count'>{cart.length}</div></div></Link>
+            <Link to={`/cart`} style={style}><div className='cart-icon'><IoCartOutline /><div className='cart-count'>{!cart.length === 0 ?  (cart.length) : ('') }</div></div></Link>
         </div>
         </IconContext.Provider>
     </div>
