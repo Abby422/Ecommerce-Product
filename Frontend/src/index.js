@@ -17,6 +17,7 @@ import Search from './Components/Search/Search';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import ProductUpdate  from './Components/Admin/adminComponents/productUpdate';
+import NotAdminPage from './Components/404 page/notAdminPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -42,7 +43,7 @@ root.render(
           <Route path='/admin/setAdmin' element={<SetAdmin />} />
           <Route path='/admin/updateProduct/:id' element={<ProductUpdate />}/>
         </Route>
-
+        <Route path='/notFound' element={<NotAdminPage/>}/>
       </Routes>
     </Router>
 
