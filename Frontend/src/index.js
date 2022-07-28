@@ -16,7 +16,7 @@ import SetAdmin from './Components/Admin/adminComponents/setAdmin';
 import Search from './Components/Search/Search';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
-import ProductsUpdate  from './Components/Admin/adminComponents/productsUpdate';
+import ProductUpdate  from './Components/Admin/adminComponents/productUpdate';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -39,10 +39,10 @@ root.render(
           <Route path='/admin/dashboard' element={<Dashboard />} />
           <Route path='/admin/DeleteProduct' element={<DeleteProduct />} />
           <Route path='/admin/setAdmin' element={<SetAdmin />} />
-          <Route path='/admin/updateProduct/:id' element={<ProductsUpdate />}/>
+          <Route path='/admin/updateProduct/:id' element={<ProductUpdate />}/>
         </Route>
 
-      </Routes>a
+      </Routes>
     </Router>
 
   </React.StrictMode>
