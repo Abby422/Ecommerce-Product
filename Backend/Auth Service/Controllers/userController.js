@@ -8,8 +8,7 @@ require('dotenv').config()
 
 const userControllers = {
   Register: async (req, res) => {
-    const { userName, email, name, password } = req.body;
-    let channel;
+    const { userName, email, Name, password } = req.body;
 
     try {
       let pool = await poolPromise();
@@ -18,7 +17,7 @@ const userControllers = {
       let insertQry = await pool.request()
       .input('userName', userName)
       .input('email', email)
-      .input('name', name)
+      .input('name', Name)
       .input('password', hashedPwd)
       .execute(`dbo.RegisterUser`)
       if (insertQry) {
