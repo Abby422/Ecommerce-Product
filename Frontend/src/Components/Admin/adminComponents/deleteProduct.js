@@ -27,9 +27,9 @@ const DeleteProduct = () => {
       }
     
     return ( 
-        <div className="updateProduct">
+        <div className="deleteProduct">
             <div className="title">
-            <p >Update Product</p>
+            <p >Delete Product</p>
             </div>
         <div className="table">
         <table
