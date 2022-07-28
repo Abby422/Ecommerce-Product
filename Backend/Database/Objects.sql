@@ -25,7 +25,9 @@ SELECT * FROM users
 --     Quantity INT NOT NULL,
 --     Discount INT DEFAULT 0,
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
---     IsAvailable BIT NOT NULL DEFAULT 0
+--     IsAvailable BIT NOT NULL DEFAULT 1
+       
+
 -- );
 -- CREATE TABLE ProductCategory(
 --     Category_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
