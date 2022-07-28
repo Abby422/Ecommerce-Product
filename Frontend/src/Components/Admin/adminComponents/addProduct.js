@@ -8,8 +8,8 @@ const AddProduct = () => {
     const [category, setCategory ] = useState('Kitchen and Dining');
     const[desc, setDesc] = useState('')
     const[img, setImg]=useState('')
-    const[price, setPrice]= useState(0)
-    const[quantity, setQuantity]=useState(0)
+    const[price, setPrice]= useState('')
+    const[quantity, setQuantity]=useState('')
     const [name, setName]= useState('')
 
     const handleSubmit = async (e)=>{
@@ -42,7 +42,7 @@ const AddProduct = () => {
             <div className="addProductForm">
                 <form onSubmit={handleSubmit}>
                     <label>
-                        category:
+                        category: 
                         <select value={category} onChange={(e)=>setCategory(e.target.value)}>
                             <option value="Kitchen and Dining">Kitchen and Dining</option>
                             <option value="Living Room">Living Room</option>
@@ -72,7 +72,7 @@ const AddProduct = () => {
                         <input type="text" value={quantity} onChange={(e)=>setQuantity(e.target.value)} />
                     </label><br />
 
-                    <button type="submit">submit</button>
+                    <button type="submit">Add Product</button>
                 </form>
             </div>
         </div>

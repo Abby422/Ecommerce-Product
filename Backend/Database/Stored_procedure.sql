@@ -111,12 +111,13 @@ GO
         @productDesc VARCHAR(MAX),
         @productPrice INT,
         @quantity INT,
-        @discount INT
+        @discount INT = 0
         )
     AS
     BEGIN
+    DECLARE @newPrice INT = @productPrice - @discount
     UPDATE Product
-    SET  Product_name = @productName, Product_description = @productDesc, Product_price = @productPrice, Quantity = @quantity, Discount = @discount
+    SET  Product_name = @productName, Product_description = @productDesc, Product_price = @newPrice, Quantity = @quantity, Discount = @discount
     WHERE Product_id  = @productID;   
 
     END

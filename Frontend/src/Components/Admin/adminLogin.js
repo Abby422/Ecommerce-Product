@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
-import './adminLogin.css'
+import './adminLogin.css';
+import { useDispatch} from 'react-redux';
+import { admin, loggedIn } from "../../redux/slices/adminReducer";
 
 
 const Adminlogin = () => {
 
-    const [login, setLogin]=useState(false)
+
     const [email, setEmail]=useState('')
     const[password, setPassword]=useState('')
+    const dispatch = useDispatch()
 
     const adminDetails={
         email:email,
@@ -19,7 +22,8 @@ const Adminlogin = () => {
         .then(res=>{
             console.log(res)
             if(res.data.message === "Successful login")
-                setLogin(true)
+                dispatch(loggedIn(true))
+                dispatch(admin(res.data))
         })
 
     }
