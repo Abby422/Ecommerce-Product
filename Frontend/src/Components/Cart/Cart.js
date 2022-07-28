@@ -14,6 +14,10 @@ function Cart() {
 
   return (
     <div className="Cart">
+      {cart.length === 0?
+      <h5>Your cart is empty </h5>
+      :
+      <div className="Cart">
       <div className="cart-table">
         <div className="table-header">
           <h5>Product Image</h5>
@@ -66,6 +70,10 @@ function Cart() {
         <button className="call-to-action">Checkout</button>
       </div>
     </div>
+    }
+      
+    </div>
+    
   );
 }
 
