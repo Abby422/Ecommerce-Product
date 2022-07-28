@@ -23,21 +23,7 @@ const ProductUpdate = () => {
     setDiscount(product.Discount)
   },[id, product.Product_name, product.Product_description, product.Quantity, product.Product_price, product.Discount])
   
-  // const handleChange = ()=>{
-  //   setName(product.Product_name)
-  //   setDesc(product.Product_description)
-  //   setQuantity(product.Quantity)
-  //   setPrice(product.Product_price)
-  //   setDiscount(product.Discount)
-  // }
-  // useEffect(()=>{
 
-  //   handleChange()
-  // },[id])
-
-
-  // console.log(products[0])
-  // console.log(id)
 
   const handleSubmit = async () => {
     let updatedProduct = {
@@ -55,15 +41,6 @@ const ProductUpdate = () => {
       })
     console.log(updatedProduct)
   }
-
-  // const handleChange = ()=>{
-  //   setName(product.Product_name)
-  //   setDesc(product.Product_description)
-  //   setQuantity(product.Quantity)
-  //   setPrice(product.Product_price)
-  //   setDiscount(product.Discount)
-  // }
-
 
   return (
     <div className='productUpdate'>
