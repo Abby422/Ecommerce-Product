@@ -150,6 +150,22 @@ GO
 ----End of Create Admin------
 
 
+EXEC spOneProduct 2
+GO
+-----End of get product by id---
+
+
+----Delete product-----
+CREATE OR ALTER PROC spDeleteProduct(@productID INT)
+AS
+BEGIN
+        UPDATE Product
+    SET  isDeleted = 0
+    WHERE Product_id  = @productID;
+END
+GO
+
+-----end of Delete product----
 
 
 ----- http://blog.aspneter.com/Images/no-thumb.jpg ------

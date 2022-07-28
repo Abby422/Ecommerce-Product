@@ -1,3 +1,4 @@
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -19,6 +20,7 @@ import Search from "./Components/Search/Search";
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
 import ProductUpdate from "./Components/Admin/adminComponents/productUpdate";
+import NotAdminPage from './Components/404 page/notAdminPage';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,11 +34,9 @@ root.render(
             <Route path="/cart" element={<Cart />} />
             <Route path="/search/:search" element={<Search />} />
           </Route>
-
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminLogin" element={<Adminlogin />} />
-
           <Route path="/admin" element={<AdminPage />}>
             <Route index element={<Dashboard />} />
             <Route path="/admin/addProduct" element={<AddProduct />} />
@@ -46,7 +46,7 @@ root.render(
             <Route path="/admin/setAdmin" element={<SetAdmin />} />
             <Route path="/admin/updateProduct/:id" element={<ProductUpdate />} />
           </Route>
-          
+          <Route path='/notFound' element={<NotAdminPage/>}/>
         </Routes>
       </Router>
     </Provider>
