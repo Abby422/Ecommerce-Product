@@ -42,7 +42,6 @@ root.render(
           <Route path='/admin/setAdmin' element={<SetAdmin />} />
           <Route path='/admin/updateProduct/:id' element={<ProductUpdate />}/>
         </Route>
-
       </Routes>
     </Router>
 
