@@ -11,6 +11,8 @@ const adminAuth = async (req, res, next)=>{
                 console.log('You are an admin')
             }else{
                 console.log('You are not an admin')
+                res.redirect('http://localhost:3000/notFound')
+                return;
             }
         }else{
             console.log('User not Found please Sign up')
