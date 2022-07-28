@@ -42,11 +42,8 @@ root.render(
           <Route path='/admin/setAdmin' element={<SetAdmin />} />
           <Route path='/admin/updateProduct/:id' element={<ProductUpdate />}/>
         </Route>
-<<<<<<< HEAD
 
       </Routes>
-=======
->>>>>>> 8ef437a6fece938d001810d7f52cd70ccccdc58e
     </Router>
 
   </React.StrictMode>

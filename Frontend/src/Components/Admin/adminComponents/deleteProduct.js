@@ -5,12 +5,26 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const DeleteProduct = () => {
     const [products, setProducts] = useState([])
+    const [id, setId]=useState(0)
 
     useEffect(() => {
       axios.get(`http://localhost:5000/adminProducts`)
         .then(res => setProducts(res.data.data))
       },[])
-      console.log(products)
+      // console.log(products)
+
+      const handleDelete = async ()=>{
+        await axios.post(`http://localhost:5000/deleteProduct`, id)
+        .then(res=>{
+          console.log(res)
+        })
+
+      }
+
+      const handleClick=(id)=>{
+          setId(id)
+          handleDelete()
+      }
     
     return ( 
         <div className="updateProduct">
@@ -58,8 +72,13 @@ const DeleteProduct = () => {
                 <td>${product.Product_price}.00</td>
                 <td>{product.Quantity}</td>
                 <td>${product.Discount}.00</td>
-                {!product.IsAvailable ? <td>Available</td> : <td>Not Available</td> }
-                <td><RiDeleteBin6Line /></td>
+                {product.IsAvailable ? <td>Available</td> : <td>Not Available</td> }
+                <td><RiDeleteBin6Line
+                    onClick={()=>handleClick(product.Product_id)}
+                  style={{
+                    cursor:"pointer"
+                  }}
+                /></td>
               </tr>
             ))}
           </tbody>
