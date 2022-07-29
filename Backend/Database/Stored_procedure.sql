@@ -161,7 +161,7 @@ CREATE OR ALTER PROC spDeleteProduct(@productID INT)
 AS
 BEGIN
         UPDATE Product
-    SET  isDeleted = 0
+    SET  isDeleted = 1
     WHERE Product_id  = @productID;
 END
 GO
