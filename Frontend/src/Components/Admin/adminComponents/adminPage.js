@@ -5,9 +5,13 @@ import { AiOutlineLogout } from 'react-icons/ai'
 import { useState } from 'react';
 
 
+
+
 const AdminPage = () => {
 
+
     const [name, setName] = useState('ADMIN')
+
 
     return (
 
@@ -33,9 +37,11 @@ const AdminPage = () => {
             </div>
             <div className="content">
                 <div className="navbar">
-                    <div className='welcome'>
-                        <span className='text'>{`Welcome admin ${name}`}</span>
-                        <span className='icon'> <AiOutlineLogout /></span>
+                    <div className='text'>
+                        <p>{`Welcome admin ${name}`}</p>
+                    </div>
+                    <div className="icon">
+                    <AiOutlineLogout />
                     </div>
                 </div>
                 <div className="changingContent">

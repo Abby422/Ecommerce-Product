@@ -68,7 +68,7 @@ const userControllers = {
         .execute(`dbo.LoginUser`)
       if (findUser.recordset.length > 0) {
         const user = findUser.recordset[0];
-
+        const name = findUser.recordset.Name
         const auth = await bcrypt.compare(password, user.Password);
 
         if (auth) {
@@ -77,6 +77,7 @@ const userControllers = {
           });
           res.status(200).json({
             email: email,
+            name:name,
             message: "Successful login",
             token: token,
           });

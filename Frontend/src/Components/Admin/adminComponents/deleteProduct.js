@@ -14,7 +14,7 @@ const DeleteProduct = () => {
       // console.log(products)
 
       const handleDelete = async ()=>{
-        await axios.post(`http://localhost:5000/deleteProduct`, id)
+        await axios.post(`http://localhost:5000/deleteProduct`, parseInt(id))
         .then(res=>{
           console.log(res)
         })
