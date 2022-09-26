@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import {Link} from 'react-router-dom'
 
 const ProductUpdate = () => {
   const [product, setProduct] = useState([])
@@ -46,19 +47,30 @@ const ProductUpdate = () => {
     <div className='productUpdate'>
       <div className="title">
         <p>Update Products</p>
-        <p>{id}</p>
       </div>
       <div className="form">
         <form onSubmit={handleSubmit}>
-          <img src={product.Product_image} alt="" width="300px" height="200px" /> <br /> <br />
+          <table>
+            <tbody>
+              <tr>
+                <td>
+        <div className="img">
+          <img src={product.Product_image} alt="" width="400px" height="300px" /> <br /> <br />
+        </div></td>
+        <td>
+        <div className="text">
           <label>
             Name:
             <input type="text" value={name || ''} onChange={(e) => setName(e.target.value)} />
           </label> <br /> <br />
-          <label >
-            Description: <br />
-            <textarea value={desc || ''} onChange={(e) => setDesc(e.target.value)} cols="50" rows="8" />
-          </label> <br /> <br />
+          <label 
+          style={{
+            marginBottom:"10px"
+          }}
+          >
+            Description:
+          </label> 
+            <textarea value={desc || ''} onChange={(e) => setDesc(e.target.value)} cols="50" rows="8" /> <br /> <br />
           <label>
             Quantity:
             <input type="text" value={quantity || ''} onChange={(e) => setQuantity(e.target.value)} />
@@ -71,7 +83,19 @@ const ProductUpdate = () => {
             Discount:
             <input type="text" value={discount || ''} onChange={(e) => setDiscount(e.target.value)} />
           </label> <br />
-          <button type="submit">submit</button>
+          <button type="submit"
+          style={{
+            marginRight:"20px"
+          }}
+          >Update Product</button>
+         <Link to='/admin/updateProduct'>
+         <button>Go back</button>
+         </Link>  
+          </div>
+          </td>
+          </tr>
+          </tbody>
+          </table> 
         </form>
       </div>
 
