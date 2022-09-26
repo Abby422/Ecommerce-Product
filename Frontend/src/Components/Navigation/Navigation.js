@@ -7,10 +7,11 @@ import {CgProfile} from 'react-icons/cg'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
-const style = {color : 'black'}
+const style = {color : 'black', textDecoration : 'none'}
 function Navigation() {
   const [search, setSearch] = useState(null)
   const {cart} = useSelector(state => (state.cart))
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className='Navigation'>
         <div className='abby-navigation-logo'>
@@ -21,8 +22,8 @@ function Navigation() {
         <div className='abby-navigation-left'>
             <input type='search'name='searchBar' onChange={e =>{setSearch(e.target.value)}} />
             <Link to={`/search/${search}`} style={style}><div className='search-icon'><IoSearchOutline /></div></Link>
-            <div className='profile' style={style}><CgProfile /></div>
-            <Link to={`/cart`} style={style}><div className='cart-icon'><IoCartOutline /><div className='cart-count'>{!cart.length === 0 ?  (cart.length) : ('') }</div></div></Link>
+            {user? <div className='profile' style={style}><CgProfile /><p> Welcome {user.userName}</p></div>: <div className='profile' style={style}><CgProfile /></div>}
+            <Link to={`/cart`} style={style}><div className='cart-icon'><IoCartOutline />{cart.length === 0 ?  '' :  <div className='cart-count'>{cart.length}</div>}</div></Link>
         </div>
         </IconContext.Provider>
     </div>

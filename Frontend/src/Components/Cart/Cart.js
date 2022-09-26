@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css";
 import { MdDeleteSweep } from "react-icons/md";
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 import {
   decrementQuantity,
   incrementQuantity,
@@ -10,8 +12,20 @@ import {
 
 function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { cart } = useSelector((state) => state.cart);
+  const user = JSON.parse(localStorage.getItem('user'));
 
+  const order = {...cart, ...user}
+  console.log(order)
+  async function handleCheckout(){
+    await axios
+      .post(`http://localhost:7000/checkout`, cart, {headers: { "Content-type": "application/json" },})
+      .then((res) => {
+        alert("Successful checkout");
+        navigate("/");
+      })
+  }
   return (
     <div className="Cart">
       {cart.length === 0?
@@ -67,7 +81,7 @@ function Cart() {
         ))}
       </div>
       <div>
-        <button className="call-to-action">Checkout</button>
+        <button className="call-to-action" onclick={handleCheckout}>Checkout</button>
       </div>
     </div>
     }

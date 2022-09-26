@@ -16,6 +16,7 @@ function ProductDetail() {
   const dispatch = useDispatch();
   const productId = useParams();
   const productDetails = useSelector((state) => state.product);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const { cart } = useSelector((state) => state.cart);
   console.log(cart);
@@ -69,7 +70,8 @@ function ProductDetail() {
             </div>
 
             <div className="product-buttons">
-              {cartItem ? (
+              {user ?
+              (<>{cartItem ? (
                 <div className="call-to-action-button">
                   <button className="count-button" onClick={handleDecrement}>
                     -
@@ -84,7 +86,11 @@ function ProductDetail() {
                   <IoCartOutline />
                   Add to cart
                 </button>
-              )}
+              )}</>)
+              :
+              null
+            }
+              
             </div>
           </div>
         </div>

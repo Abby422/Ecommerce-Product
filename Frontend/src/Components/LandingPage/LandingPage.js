@@ -4,14 +4,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrInstagram, GrFacebook } from "react-icons/gr";
-import { FiTwitter, FiChevronsRight } from "react-icons/fi";
+import { FiTwitter, } from "react-icons/fi";
 import ImageOne from "../../Images/Caurosel1.jpg";
 import ImageTwo from "../../Images/Caurosel2.jpg";
 import ImageThree from "../../Images/Caurosel3.jpg";
 import Products from "../Products/Products";
 import {Link} from 'react-router-dom'
 
+const style = {textDecoration : 'none', color : 'black'}
 function LandingPage() {
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="home-content-container">
     <div className="landing-page-container">
@@ -33,9 +35,9 @@ function LandingPage() {
             </h3>
           </div>
           
-          <div className="call-to-action">
-            <Link to={`/register`}></Link>Sign up <FiChevronsRight />
-          </div>
+          
+            {user ? '' : <div className="call-to-action"><Link to={`/register`} style={style}>Sign up </Link></div>}
+            
         </div>
       </div>
 
