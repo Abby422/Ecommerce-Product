@@ -11,7 +11,7 @@ function Products() {
     const shopProducts = useSelector(state => state.products)
 
     useEffect(() =>{
-        axios.get(ProductUrl).then(res => dispatch(allProducts(res.data.data)))
+        axios.post(ProductUrl, {"pageNumber":1,"rowNumber":10}, {headers: { "Content-type": "application/json" },}).then(res => dispatch(allProducts(res.data.data)))
     }, [])
   return (
     <div className='products_container'>

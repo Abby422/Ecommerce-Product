@@ -10,7 +10,7 @@ import Alert from "react-bootstrap/Alert";
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  const user = JSON.parse(localStorage.getItem('user'));
   const [setShow] = useState(true);
   const [values, setValues] = useState("");
 
@@ -32,15 +32,12 @@ function Login() {
     console.log(values);
     const { email, password } = values;
 
-    await axios
-      .post(
-        `http://localhost:7000/login`,
-        { email, password },
-        { headers: { "Content-type": "application/json" } }
-      )
+    await axios.post(`http://localhost:7000/login`,{ email, password },{ headers: { "Content-type": "application/json" }})
       .then((res) => {
         dispatch(users(res.data));
         handleMessage(user);
+        localStorage.setItem('user',JSON.stringify(res.data.user));
+        localStorage.setItem('token',JSON.stringify(res.data.token))
         navigate("/");
       });
   }

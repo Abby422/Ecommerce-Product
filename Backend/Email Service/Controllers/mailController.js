@@ -1,16 +1,15 @@
 const nodemailer = require('nodemailer')
-const path = require('path')
-const imgLink =  path.resolve(`${__dirname}../images/welcome.png`);
+// const path = require('path')
+// const imgLink =  path.resolve(`${__dirname}../images/welcome.png`);
 
 
 const registrationMailController = {
     sendEmail: async(req,res)=>{
-        let content = `Hi victor
-
-
-        Welcome aboard to our E-Commerce site hope you are 
-        able to shop with us. Our website is the # 1 E-commerce 
-        Website for trending products.`
+        const {name, uemail} = req.body
+        // let content = `Hi 
+        // Welcome aboard to our E-Commerce site hope you are 
+        // able to shop with us. Our website is the # 1 E-commerce 
+        // Website for trending products.`
 
 
         let HTML =  `<!doctype html>
@@ -22,14 +21,14 @@ const registrationMailController = {
             </style>
           </head>
           <body style="color: white;">
-          <h2>Hi Victor</h2>
+          <h2>Hi ${name}</h2>
           </br>
           </br>
           <p>Welcome aboard to our E-Commerce site hope you are 
           able to shop with us. Our website is the # 1 E-commerce 
           Website for trending products.</p>
 
-            <p><img src="${imgLink}" alt="Welcome Picture" width="200px" height="150px"/></p>
+             
           </body>
         </html>`
 
@@ -46,7 +45,7 @@ const registrationMailController = {
             });
             let message = {
                 from:'sekanixv@outlook.com',
-                to:`vmuriithi10@gmail.com`,
+                to: uemail,
                 subject:'Thank you for choosing us',
                 html:HTML
    

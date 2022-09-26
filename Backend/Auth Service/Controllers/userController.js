@@ -26,11 +26,11 @@ const userControllers = {
         });
         res.status(201).json({
           success: true,
-          user: { userName, email },
+          user: { userName, email,  },
           message: "user added",
           token: token,
         });
-     
+      
       }
     } catch (error) {
       if (
