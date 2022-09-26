@@ -1,24 +1,24 @@
-POST  http://localhost:5000/register
+POST  http://localhost:7000/register
 Content-Type: application/json
 
  {
-    "userName":"testUser13",
-    "name": "user13",
-    "email":"testuser13@gmail.com",
-    "password":"password13"
+    "userName":"triston3",
+    "Name": "badboy3",
+    "email":"badboytriston3@gmail.com",
+    "password":"tristin"
  }
 
 ####
-POST  http://localhost:3000/login
+POST  http://localhost:7000/login
 Content-Type: application/json
 
  {
-    "email":"yourguyscow@youtu.be",
-    "password":"dCWLVppbYRC1"
+    "email":"badboytriston@gmail.com",
+    "password":"tristin"
  } 
 
 ###
-POST  http://localhost:3000/updateProfile
+POST  http://localhost:7000/updateProfile
 Content-Type: application/json
 
  {
@@ -26,3 +26,13 @@ Content-Type: application/json
     "Name": "Love",
     "email":"yourguyscow@youtu.be"
  } 
+
+####
+
+POST  http://localhost:7000/adminogin
+Content-Type: application/json
+
+ {
+    "email":"badboytriston@gmail.com",
+    "password":"tristin"
+ }

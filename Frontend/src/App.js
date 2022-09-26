@@ -1,14 +1,14 @@
-import './App.css';
 import Footer from './Components/Footer/Footer';
-import LandingPage from './Components/LandingPage/LandingPage';
+import './App.css'
+import { Outlet } from 'react-router';
 import Navigation from './Components/Navigation/Navigation';
 
 function App() {
   return (
     <div className="App">
-      <Navigation/>
-      <LandingPage />
-      <Footer/>
+        <Navigation/>
+        <Outlet />
+        <Footer/>
     </div>
   );
 }

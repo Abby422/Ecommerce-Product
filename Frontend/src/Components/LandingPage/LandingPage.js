@@ -4,13 +4,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrInstagram, GrFacebook } from "react-icons/gr";
-import { FiTwitter } from "react-icons/fi";
+import { FiTwitter, FiChevronsRight } from "react-icons/fi";
 import ImageOne from "../../Images/Caurosel1.jpg";
 import ImageTwo from "../../Images/Caurosel2.jpg";
 import ImageThree from "../../Images/Caurosel3.jpg";
+import Products from "../Products/Products";
+import {Link} from 'react-router-dom'
 
 function LandingPage() {
   return (
+    <div className="home-content-container">
     <div className="landing-page-container">
       <div className="landingPage">
         <div className="landing-page-content">
@@ -29,15 +32,16 @@ function LandingPage() {
               home decor budget to the next level.
             </h3>
           </div>
+          
           <div className="call-to-action">
-            <button>Sign up </button>
+            <Link to={`/register`}></Link>Sign up <FiChevronsRight />
           </div>
         </div>
       </div>
 
       <div className="landing-caurosel">
         <div className="slider-container">
-          <Slider autoplay={true} autoplaySpeed={2000} dots={true} fade={true} infinite={true}>
+          <Slider autoplay={true} autoplaySpeed={3000} dots={true} fade={true} infinite={true} slideToShow={1} slideToScroll={1}>
             <div>
               <img src={ImageOne} className="slider " alt="caurosel"></img>
             </div>
@@ -60,7 +64,9 @@ function LandingPage() {
         <div>
           <GrFacebook />
         </div>
+        </div>
       </div>
+      <Products />
     </div>
   );
 }

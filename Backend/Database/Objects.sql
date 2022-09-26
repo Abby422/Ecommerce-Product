@@ -9,7 +9,8 @@
 --     User_role VARCHAR(50) DEFAULT 'User' NOT NULL
 -- );
 
-SELECT * FROM users
+SELECT *
+FROM users
 
 -- UPDATE Users
 -- SET User_role = 'Admin'
@@ -25,51 +26,33 @@ SELECT * FROM users
 --     Quantity INT NOT NULL,
 --     Discount INT DEFAULT 0,
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
---     IsAvailable BIT NOT NULL DEFAULT 0
+--     IsAvailable BIT NOT NULL DEFAULT 1,
+--     isDeleted BIT NOT NULL DEFAULT 0,
 -- );
+-- DROP TABLE Product
+
 -- CREATE TABLE ProductCategory(
 --     Category_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 --     Categroy_name VARCHAR(6000)
 -- );
 
 -- CREATE TABLE Orders(
---     Order_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
---     User_Id INT NOT NULL FOREIGN KEY REFERENCES Users(User_Id),
---     Quantity INT NOT NULL,
---     total INT,
+--     Order_id VARCHAR(255) NOT NULL PRIMARY KEY,
+--     User_Id INT NOT NULL  FOREIGN KEY REFERENCES Users(User_Id),
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
---     IsCanceled BIT NOT NULL DEFAULT 0
--- );
--- SELECT * FROM Users WHERE IsDeleted = 0
-
--- CREATE TABLE Temp_Orders(
---     Temporder INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
---     Product_id INT NOT NULL FOREIGN KEY REFERENCES Product(Product_id),
+--     IsCanceled BIT DEFAULT 0
 -- )
 
 -- CREATE TABLE OrderDetails(
---     OrderDetails INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
---     Order_id INT NOT NULL FOREIGN KEY REFERENCES Orders(Order_id),
+--     Order_id VARCHAR(255) NOT NULL FOREIGN KEY REFERENCES Orders(Order_id),
 --     Product_id INT NOT NULL FOREIGN KEY REFERENCES Product(Product_id),
---     IsCanceled BIT NOT NULL DEFAULT 0
--- );
-INSERT INTO Orders (User_Id, Quantity, total) VALUES ('2', '1', '125')
-GO
+--     Quantity INT NOT NULL,
+--     Total INT NOT NULL,
+--     IsCanceled BIT DEFAULT 0
+-- )
+-- GO
 
-CREATE OR ALTER TRIGGER trg_order
-ON Orders
-AFTER INSERT
-AS
-BEGIN
-    DECLARE
-    @OrderId INT,
-    @ProductId INT
-    SET NOCOUNT ON;
-    SELECT @OrderId = Order_id FROM INSERTED
-    SET @ProductId = 2
-    
-    
-END
+
 
 DELETE
 FROM Orders
@@ -85,7 +68,9 @@ SELECT *FROM Users
 SELECT *FROM Orders
 SELECT *FROM OrderDetails
 
-SELECT * FROM ProductCategory WHERE (Categroy_name) LIKE ''
+SELECT *
+FROM ProductCategory
+WHERE (Categroy_name) LIKE ''
 -- JOIN Product
 -- ON  Category_id = Category_id 
 

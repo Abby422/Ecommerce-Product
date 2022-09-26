@@ -1,10 +1,11 @@
-
+SELECT *FROM Users
+GO
 CREATE OR ALTER PROCEDURE [dbo].[RegisterUser]
 (@userName VARCHAR(255), @email VARCHAR(255), @name VARCHAR(255), @password VARCHAR(255))
 AS
 BEGIN
     INSERT INTO Users(Username, Email, Name, Password) 
-    VALUES ('@userName','@email ','@name ', '@password')
+    VALUES (@userName,@email ,@name , @password)
 END
 GO
 
@@ -39,36 +40,21 @@ GO
 -- EXEC dbo.SearchProduct 'Cou'
 
 CREATE OR ALTER PROCEDURE [dbo].[CreateOrder]
-( @UserId INT, @Quantity INT, @total INT)
+(@Order_id VARCHAR(255), @UserId INT, @Json VARCHAR(MAX))
 AS
 BEGIN
-    INSERT INTO Orders(User_Id, Quantity, total) 
-    VALUES ('@UserId', '@Quantity', '@total')
+    INSERT INTO Orders(Order_id,User_Id) 
+    VALUES ('@Order_id', @UserId)
+
+    INSERT INTO OrderDetails (Order_id, Product_id, Quantity, Total)
+    SELECT * FROM
+    OPENJSON(@Json)
+    WITH(Order_id VARCHAR(255), Product_id INT, Quantity INT, Total INT )
 
 END
 GO
 
-EXEC dbo.CreateOrder    2,1,125
-GO
--- SELECT *FROM Orders
--- DELETE 
--- FROM
--- Orders
--- WHERE
--- Order_id = 2
-
-CREATE OR ALTER PROCEDURE [dbo].[EnterProducts]
-( @ProductId INT)
-AS
-BEGIN
-    INSERT INTO Temp_Orders
-    VALUES (@ProductId)
-END
-
-INSERT INTO Temp_Orders ()
-    VALUES (1,2,3)
-GO
-
+-- EXEC dbo.CreateOrder '5uw78632', 2, '[{"Order_id": "5uw78632", "Product_id": 7, "Quantity": 1, "Total": 100},{"Order_id": "5uw78632", "Product_id": 5, "Quantity": 1, "Total": 150}]';
 
 
 
@@ -125,12 +111,13 @@ GO
         @productDesc VARCHAR(MAX),
         @productPrice INT,
         @quantity INT,
-        @discount INT
+        @discount INT = 0
         )
     AS
     BEGIN
+    DECLARE @newPrice INT = @productPrice - @discount
     UPDATE Product
-    SET  Product_name = @productName, Product_description = @productDesc, Product_price = @productPrice, Quantity = @quantity, Discount = @discount
+    SET  Product_name = @productName, Product_description = @productDesc, Product_price = @newPrice, Quantity = @quantity, Discount = @discount
     WHERE Product_id  = @productID;   
 
     END
@@ -139,12 +126,10 @@ GO
 
 
 -----Get all Products ------
-CREATE OR ALTER PROC spGetAllProduct(
-    @productID INT
-)
+CREATE OR ALTER PROC spGetAllProduct
 AS
 BEGIN
-SELECT * FROM Product WHERE Product_id = @productID
+SELECT * FROM Product 
 END
 GO
 
@@ -162,9 +147,27 @@ BEGIN
 
 END
 GO
-----End of Create Admin------
+
+-- spAdmin 3
 
 
+
+EXEC spOneProduct 2
+GO
+-----End of get product by id---
+
+
+----Delete product-----
+CREATE OR ALTER PROC spDeleteProduct(@productID INT)
+AS
+BEGIN
+        UPDATE Product
+    SET  isDeleted = 0
+    WHERE Product_id  = @productID;
+END
+GO
+
+-----end of Delete product----
 
 
 ----- http://blog.aspneter.com/Images/no-thumb.jpg ------
