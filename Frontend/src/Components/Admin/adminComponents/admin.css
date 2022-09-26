@@ -1,0 +1,502 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+/*********************/
+/* Admin default Page*/
+/*********************/
+.adminPage {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+
+
+}
+
+.navigation {
+    background-color: #505050;
+    padding: 10px;
+    font-size: 15px;
+    height: 100vh;
+    width: 150px;
+    position: relative;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+}
+
+.navigation .links {
+    margin-top: 80px;
+}
+
+.navigation .links p {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.navigation .links p :hover {
+    padding: 10px;
+    border-radius: 10px;
+    transform: scale(1.1);
+    color: gray;
+    background-color: white;
+}
+
+.navigation Link {
+    text-decoration: none;
+}
+
+.content .navbar {
+    height: 70px;
+    width: 100%;
+    text-align: end;
+    background-color: grey;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+}
+.content .navbar .welcome{
+    padding-top: 20px;
+    padding-right: 10px;
+}
+content .navbar .text{
+    font-size: 15px;
+    padding-right: 20px;
+}
+.content .navbar .icon :hover{
+    color: blue;
+
+}
+
+.content .navbar p {
+    padding-top: 20px;
+    padding-right: 20px;
+    font-size: 1.1rem;
+
+}
+
+.changingContent {
+    position: relative;
+    padding-left: 150px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)),url("../Images/white-background.jpg");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+}
+
+
+/****************************/
+/*End of Admin Default Page*/
+/**************************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin dashboard Page*/
+/*********************/
+.dashboard {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+}
+
+.dashboard .title p {
+    color: #303030;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.dashboard .title {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.dashboard .flashcards {
+    display: grid;
+    width: 100%;
+    justify-content: space-around;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    margin-top: 100px;
+
+}
+
+.dashboard .flashcard {
+    text-align: end;
+    background-color: white;
+    width: 350px;
+    height: 300px;
+    border: 2px black solid;
+    border-radius: 10px;
+    box-shadow: 3px 6px 15px 5px rgba(0, 0, 0, 0.57);
+    padding: auto;
+    margin-bottom: 20px;
+    margin: 10px;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+
+.dashboard .flashcard .text{
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    height: 20%;
+    color: #C0C0C0;
+    width: 100%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.dashboard .flashcard .text .flashcardTitle{
+    padding-top: 10px;
+}
+
+.dashboard .flashcard1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('../Images/sale1.jpg');
+}
+
+
+
+
+
+.dashboard .flashcard2 {
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('../Images/revenue1.png');
+
+}
+
+
+
+
+.dashboard .flashcard3 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('../Images/products1.jpg');
+
+}
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    .dashboard .flashcards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://loremflickr.com/320/240');
+height: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover; */
+
+
+/*****************************/
+/*End of Admin dashboard Page*/
+/*****************************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin addProduct Page*/
+/*********************/
+.addProduct {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.addProduct p {
+    color: #303030;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.addProduct .title {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.addProductForm {
+    display: grid;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-top: 50px;
+    margin-top: 10px;
+    background-color: #E0E0E0;
+    width: 60vw;
+    justify-content: center;
+    font-size: 1.3rem;
+    padding-bottom: 50px;
+}
+.addProductForm input[type=text],
+.addProductForm select,
+.addProductForm option,
+.addProductForm textarea
+{
+    background-color: #F0F0F0;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: 0.5px solid black;
+    outline: none;
+    padding-left: 5px ;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.addProductForm input[type=text]:focus,
+.addProductForm textarea,
+.addProductForm select
+{
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 3px ;
+}
+
+/*****************************/
+/*End of Admin addProduct Page*/
+/*****************************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin update Product Page*/
+/*********************/
+.updateProduct {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.updateProduct p {
+    color:#303030;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.updateProduct .title {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.updateProduct table {
+    border-collapse: collapse;
+    border-radius: 20px;
+}
+
+.updateProduct td, th, Link {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: left;
+    border-radius: 20px;
+}
+
+.updateProduct .td1 {
+    border: none;
+}
+
+
+
+
+/*********************/
+/* End of Admin update Product Page*/
+/*********************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin set Admin Page*/
+/*********************/
+
+.setAdmin .title {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.setAdmin .title p {
+    color:#303030;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.setAdmin table {
+    border-collapse: collapse;
+    border-radius: 20px;
+}
+
+.setAdmin td, th, Link {
+    border: 0.2px solid black;
+    padding: 0.5rem;
+    text-align: left;
+    border-radius: 20px;
+}
+
+.setAdmin select{
+    background-color: #F0F0F0;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: 0.5px solid black;
+    outline: none;
+    padding-left: 5px ;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+.setAdmin select :focus{
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 3px ;
+}
+
+/*********************/
+/* End of Admin set admin Page*/
+/*********************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin delete Products Page*/
+/*********************/
+
+.deleteProduct .title {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.deleteProduct .title p {
+    color: #303030;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.deleteProduct table {
+    border-collapse: collapse;
+    border-radius: 20px;
+}
+
+.deleteProduct td, th, Link {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: left;
+    border-radius: 20px;
+}
+
+/*********************/
+/* End of Admin delete Products Page*/
+/*********************/
+
+/*********************/
+/********************/
+/********************/
+
+/*********************/
+/* Admin product Update Page*/
+/*********************/
+.productUpdate {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.productUpdate .title {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.productUpdate .title p {
+    color: #303030;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.productUpdate .form {
+    display: grid;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-top: 30px;
+    margin-top: 20px;
+    background-color: #E0E0E0;
+    width: 60vw;
+    height: fit-content;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding-bottom: 30px;
+}
+
+.productUpdate .form img {
+    padding-left: 10x;
+    padding-right: 50px;
+}
+
+.productUpdate input[type=text],
+.productUpdate select,
+.productUpdate option,
+.productUpdate textarea
+{
+    background-color: #F0F0F0;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: 0.5px solid black;
+    outline: none;
+    padding-left: 5px ;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.productUpdate input[type=text]:focus,
+.productUpdate textarea,
+.productUpdate select
+{
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 3px ;
+}
+
+
+
+
+/*********************/
+/* End of Admin product UpdatePage*/
+/*********************/
