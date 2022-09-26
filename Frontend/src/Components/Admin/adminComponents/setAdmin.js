@@ -7,14 +7,18 @@ import { useEffect, useState } from "react";
 const SetAdmin = () => {
     // const change = 'constant'
     const [data, setData] = useState([])
-    const[role, setRole]=useState('')
-    const[id, setId] = useState('')
+    const[role, setRole]=useState()
+    const[id, setId] = useState()
 
 
 
 
     console.log(data)
 
+    useEffect(() => {
+        axios.get('http://localhost:7000/getAllUsers')
+            .then(res => setData(res.data.data))
+    }, [id])
 
     useEffect(()=>{
         let user={
@@ -29,10 +33,13 @@ const SetAdmin = () => {
         })
     },[role, id])
 
-    useEffect(() => {
-        axios.get('http://localhost:7000/getAllUsers')
-            .then(res => setData(res.data.data))
-    }, [role])
+
+    // (e)=>setRole(e.target.value)
+    // setId(obj.User_Id)
+    const handleChange = (value, id)=>{
+        setRole(value)
+        setId(id)
+    }
 
     return (
         <div className="setAdmin">
@@ -76,7 +83,7 @@ const SetAdmin = () => {
                                 <td>{obj.Name}</td>
                                 {obj.IsDeleted ? <td>true</td> : <td>false</td>}
                                 <td>
-                                    <select value={obj.User_role} onChange={(e)=>setRole(e.target.value)&&setId(obj.User_Id)}>
+                                    <select value={obj.User_role || ''} onChange={(e)=>handleChange(e.target.value, obj.User_Id)}>
                                         <option value="Admin">admin</option>
                                         <option value="User">user</option>
                                     </select>

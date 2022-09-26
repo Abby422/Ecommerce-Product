@@ -27,6 +27,12 @@ Content-Type: application/json
     "email":"yourguyscow@youtu.be"
  } 
 
- ####
- 
- GET http://localhost:7000/getAllUsers
+####
+
+POST  http://localhost:7000/adminogin
+Content-Type: application/json
+
+ {
+    "email":"badboytriston@gmail.com",
+    "password":"tristin"
+ }

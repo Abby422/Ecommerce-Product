@@ -111,12 +111,13 @@ GO
         @productDesc VARCHAR(MAX),
         @productPrice INT,
         @quantity INT,
-        @discount INT
+        @discount INT = 0
         )
     AS
     BEGIN
+    DECLARE @newPrice INT = @productPrice - @discount
     UPDATE Product
-    SET  Product_name = @productName, Product_description = @productDesc, Product_price = @productPrice, Quantity = @quantity, Discount = @discount
+    SET  Product_name = @productName, Product_description = @productDesc, Product_price = @newPrice, Quantity = @quantity, Discount = @discount
     WHERE Product_id  = @productID;   
 
     END
@@ -150,6 +151,22 @@ GO
 ----End of Create Admin------
 
 
+EXEC spOneProduct 2
+GO
+-----End of get product by id---
+
+
+----Delete product-----
+CREATE OR ALTER PROC spDeleteProduct(@productID INT)
+AS
+BEGIN
+        UPDATE Product
+    SET  isDeleted = 0
+    WHERE Product_id  = @productID;
+END
+GO
+
+-----end of Delete product----
 
 
 ----- http://blog.aspneter.com/Images/no-thumb.jpg ------

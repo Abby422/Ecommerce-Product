@@ -9,7 +9,8 @@
 --     User_role VARCHAR(50) DEFAULT 'User' NOT NULL
 -- );
 
-SELECT * FROM users
+SELECT *
+FROM users
 
 -- UPDATE Users
 -- SET User_role = 'Admin'
@@ -25,10 +26,11 @@ SELECT * FROM users
 --     Quantity INT NOT NULL,
 --     Discount INT DEFAULT 0,
 --     Created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
---     IsAvailable BIT NOT NULL DEFAULT 1
-       
-
+--     IsAvailable BIT NOT NULL DEFAULT 1,
+--     isDeleted BIT NOT NULL DEFAULT 0,
 -- );
+-- DROP TABLE Product
+
 -- CREATE TABLE ProductCategory(
 --     Category_id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 --     Categroy_name VARCHAR(6000)
@@ -50,7 +52,7 @@ SELECT * FROM users
 -- )
 -- GO
 
-GO
+
 
 DELETE
 FROM Orders
@@ -66,7 +68,9 @@ SELECT *FROM Users
 SELECT *FROM Orders
 SELECT *FROM OrderDetails
 
-SELECT * FROM ProductCategory WHERE (Categroy_name) LIKE ''
+SELECT *
+FROM ProductCategory
+WHERE (Categroy_name) LIKE ''
 -- JOIN Product
 -- ON  Category_id = Category_id 
 
