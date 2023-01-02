@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './Navigation.css'
 import {IconContext} from "react-icons";
-import {GiHamburgerMenu} from 'react-icons/gi'
+// import {GiHamburgerMenu} from 'react-icons/gi'
 import {IoSearchOutline, IoCartOutline} from 'react-icons/io5'
 import {CgProfile} from 'react-icons/cg'
 import { Link } from 'react-router-dom'
@@ -14,12 +14,16 @@ function Navigation() {
   const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className='Navigation'>
-        <div className='abby-navigation-logo'>
-            <Link to={`/`} style={style}><GiHamburgerMenu/></Link>
+            {/* <Link to={`/`} style={style}><GiHamburgerMenu/></Link> */}
             <div className='logo'>SPACEJOY</div>
+        <div className='abby-navigation-logo'>
+            <div className='home'><Link to={`/`} style={style}>Home</Link></div>
+            <div className='about' ><Link to={`/about`} style={style}>About</Link></div>
         </div>
+            
       <IconContext.Provider value={{size: 25 }}>
         <div className='abby-navigation-left'>
+            
             <input type='search'name='searchBar' onChange={e =>{setSearch(e.target.value)}} />
             <Link to={`/search/${search}`} style={style}><div className='search-icon'><IoSearchOutline /></div></Link>
             {user? <div className='profile' style={style}><CgProfile /><p> Welcome {user.userName}</p></div>: <div className='profile' style={style}><CgProfile /></div>}
