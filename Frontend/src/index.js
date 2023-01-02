@@ -6,6 +6,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import About from "./Components/About/About";
 import Adminlogin from "./Components/Admin/adminLogin";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import LandingPage from "./Components/LandingPage/LandingPage";
@@ -30,6 +31,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<LandingPage />} />
+            <Route path="/about" element={<About />} />
             <Route path="/:productId" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/search/:search" element={<Search />} />
