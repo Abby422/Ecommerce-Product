@@ -1,95 +1,266 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.home-content-container{
-    display: flex;
-    flex-direction: column;
-}
-.landing-page-container{
-    background-color: #E7E4DD;
-    display: flex;
-    min-width: 90vw;
-    font-family: 'Italiana', serif;
-}
-.landingPage{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.landing-page-content{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+/* Every heading rule here is scoped to the landing page. The original file set
+   a bare `h1 { font-size: 5rem }`, which leaked into the cart, the forms and
+   the admin area because CRA bundled all component CSS into one sheet. */
+
+.home-content-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.landing-caurosel{
-    display: flex;
-    flex: 1;
-    height: 100vh;
-    margin-right: 5px;
-    overflow: hidden;
-}
-.slider{ 
-    width: 90vw;
-    height: 100vh;
-    /* z-index: 1; */
-}
-.slider img{
-    width: 100%;
-    height: 100%;
-}
-.slick-arrow.slick-prev,
-.slick-arrow.slick-next{
-    display: block;
+/* A column flex container does not shrink a child below its intrinsic minimum,
+   so a wide grid or a carousel track pushes past the viewport instead of
+   stretching to it. Pinning the width makes each child obey the container and
+   handle its own overflow. */
+.home-content-container > * {
+  width: 100%;
+  min-width: 0;
 }
 
-.social-handles{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 2;
-    right: 10px;
-    top: 40vh;
-}
-h1{
-    font-weight: 400;
-    font-size: 5rem;
-    line-height: 113px;
+.landing-page-container > * {
+  min-width: 0;
 }
 
-h2{
-    font-size: 2rem;
-    line-height: 57px;
+.landing-page-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: min(100vh, 48rem);
+  background: var(--bone);
 }
 
-h3{
-    font-size: 1rem;
-    line-height: 28px;
+.landingPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
 }
 
-.call-to-action {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 10vw;
-    padding: 10px 20px;
-    font-size: 1.5rem;
-    border: none;
-    background-color: #fdedc0;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 5px 7px;
-    border-radius: 10px;
+.landing-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.15rem;
+  max-width: 34rem;
 }
 
-.call-to-action:hover{
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-    transform: scale(1.12);
+.landing-page-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
 
+.landing-page-content h2 {
+  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.landing-page-content p {
+  max-width: 42ch;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.15rem;
+}
+
+.hero-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.landing-caurosel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.landing-caurosel .slick-list {
+  overflow: hidden;
+}
+
+.slider-container,
+.landing-caurosel .slick-slider,
+.landing-caurosel .slick-list,
+.landing-caurosel .slick-track,
+.landing-caurosel .slick-slide > div {
+  height: 100%;
+}
+
+.landing-caurosel img.slider {
+  width: 100%;
+  height: min(100vh, 48rem);
+  object-fit: cover;
+}
+
+@media (max-width: 860px) {
+  .landing-page-container {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .landingPage {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .landing-caurosel img.slider {
+    height: 55vh;
+  }
+}
+
+/* ---------- landing additions ---------- */
+
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.75rem;
+  margin-top: 1rem;
+}
+
+.value-props {
+  min-width: 0;
+  display: grid;
+  /* min() lets auto-fit collapse to a single column below 15rem instead of
+     holding three tracks open and overflowing. */
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.5rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2rem 0;
+  list-style: none;
+}
+
+.value-props {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.value-props-wrap {
+  padding: 0 var(--gutter);
+}
+
+.value-props li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.value-props strong {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.value-props svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  font-size: 1.35rem;
+  color: var(--ink-soft);
+}
+
+.value-props div {
+  display: flex;
+  flex-direction: column;
+}
+
+.value-props span {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.category-grid-section {
+  padding: 1rem var(--gutter) 3rem;
+}
+
+.category-grid-section > * {
+  max-width: var(--page);
+  margin-inline: auto;
+}
+
+.category-grid-section {
+  padding-top: 4rem;
+}
+
+.category-grid-section h2 {
+  margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+}
+
+/* Explicit column counts rather than auto-fit: with six categories, auto-fit
+   resolved to five across at desktop and stranded the sixth alone on a second
+   row. Three and two divide evenly. */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category-tile {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 17rem;
+  padding: 1.25rem;
+  color: #fff;
+  text-decoration: none;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* A wash rather than a flat overlay, so the photograph still reads. */
+.category-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 62%) 0%, rgb(0 0 0 / 8%) 60%);
+}
+
+.category-tile span {
+  position: relative;
+  z-index: 1;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.category-tile:hover::after {
+  background: linear-gradient(to top, rgb(0 0 0 / 72%) 0%, rgb(0 0 0 / 18%) 60%);
+}
+
+.view-all {
+  margin-bottom: 3rem;
 }

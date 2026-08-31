@@ -1,68 +1,218 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Card-only rules. The grid that lays these out lives in Products.css.
+
+   The card is deliberately almost invisible: no fill, no border, no shadow, no
+   large radius. Each product photograph carries its own background colour, and
+   wrapping thirty of them in a beige panel turned the grid into a patchwork.
+   Letting the images sit on the page ground is what makes a catalogue read as
+   considered rather than templated. */
+
+.products-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  background: none;
+  border: none;
 }
 
-.products_container{
-    display: flex;
-    flex-wrap: wrap;
-    font-family: 'Italiana', serif;
-    padding-top: 100px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgb(227,226,225);
-    background: linear-gradient(150deg, rgba(227,226,225,1) 0%, rgba(240,232,208,1) 65%, rgba(247,234,205,1) 100%);
-}    
-.products{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 5vw;
-    margin: 5vw;
-    gap: 20px;
+.products-card__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--line-soft);
+  border-radius: var(--radius);
 }
-.products-card{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 13vw;
-    min-height: 50vh;
-    border: 1px solid #f2e8d2;
-    border-radius: 20px;
-    font-size: 20px;
-    border-radius: 20px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    background-color: #f2e8d2;
+
+.products-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.products-card:hover img {
+  transform: scale(1.03);
+}
+
+/* ---------- overlays ---------- */
+
+.wish-button {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: inline-flex;
+  padding: 0.45rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: rgb(255 255 255 / 82%);
+  border: none;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+
+/* Always visible once saved, and on touch devices where there is no hover. */
+.products-card:hover .wish-button,
+.wish-button:focus-visible,
+.wish-button.is-wished {
+  opacity: 1;
+}
+
+.wish-button.is-wished {
+  color: var(--danger);
+}
+
+@media (hover: none) {
+  .wish-button {
+    opacity: 1;
+  }
+}
+
+.products-card__flags {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-start;
+}
+
+/* Set as small letterspaced caps on a plain ground rather than a filled pill —
+   a coloured badge on every card competes with the product. */
+.flag {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgb(255 255 255 / 88%);
+  border-radius: var(--radius);
+}
+
+.flag--sale {
+  color: var(--sage);
+}
+
+.flag--out {
+  color: var(--bone);
+  background: rgb(26 23 20 / 82%);
+}
+
+/* ---------- body ---------- */
+
+.products-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+}
+
+.products-card__title {
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.products-card__title:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+
+.products-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.1rem;
+}
+
+.price-now {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.price-was {
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+
+.stock-warning {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+/* ---------- action ---------- */
+
+.product-action {
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+/* A quiet outline rather than a filled pill. Thirty saturated buttons down a
+   grid is the single loudest thing on the page. */
+.products-card .call-to-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: none;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.products-card .call-to-action-button:hover:not(:disabled) {
+  color: var(--bone);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.products-card .quantity-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+}
+
+.products-card .count-button {
+  padding: 0 0.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-card img,
+  .products-card .call-to-action-button,
+  .wish-button {
+    transition: none;
   }
 
-  .products-card img{
-    width: 13vw;
-    height: 25vh;
-    border-radius: 20px;
+  .products-card:hover img {
+    transform: none;
   }
-
-  .products-card button{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    font-weight: bolder;
-    justify-content: space-around;
-    border: none;
-    background-color: #fdedc0;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 5px 7px;
-    border-radius: 45px;
-  }
-  
-  .products-card:hover{
-    box-shadow: 2px 2px 1px rgb(182, 179, 179);
-    border-radius: 10px;
-    transform: scale(1.02);
-  }
-  
+}
