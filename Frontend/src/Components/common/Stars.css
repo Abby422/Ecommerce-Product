@@ -1,0 +1,52 @@
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.stars__icons {
+  display: inline-flex;
+  gap: 0.05rem;
+  color: var(--gold);
+}
+
+.stars__empty {
+  color: var(--line);
+}
+
+.stars--sm {
+  font-size: 0.75rem;
+}
+
+.stars--md {
+  font-size: 0.9rem;
+}
+
+.stars--lg {
+  font-size: 1.15rem;
+}
+
+.stars__value {
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+.stars__count {
+  font-size: 0.85em;
+  color: var(--ink-soft);
+}
+
+.stars--input {
+  font-size: 1.5rem;
+  gap: 0.15rem;
+}
+
+.stars__button {
+  display: inline-flex;
+  padding: 0.1rem;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+}

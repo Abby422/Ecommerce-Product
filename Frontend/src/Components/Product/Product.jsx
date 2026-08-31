@@ -1,50 +1,95 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { IoCartOutline } from 'react-icons/io5';
+import { IoCartOutline, IoHeart, IoHeartOutline } from 'react-icons/io5';
 import './Product.css';
+import { formatMoney } from '../../lib/format';
 import { onImageError } from '../../lib/placeholder';
+import Stars from '../common/Stars';
+import { useToast } from '../common/toastContext';
 import {
   addItem,
   incrementQuantity,
   decrementQuantity,
   selectCartItem,
 } from '../../redux/slices/cartReducer';
+import { toggleWish, selectIsWished } from '../../redux/slices/wishlistReducer';
+import { openCartDrawer } from '../../redux/slices/uiReducer';
 
-const style = { textDecoration: 'none' };
+const LOW_STOCK = 5;
 
 function Product({ product }) {
   const dispatch = useDispatch();
+  const toast = useToast();
   // `.find` on the cart, not a `.map` that produced ["", 2, ""] and was then
   // compared against a number.
   const cartItem = useSelector(selectCartItem(product.Product_id));
+  const wished = useSelector(selectIsWished(product.Product_id));
+
   const quantity = cartItem?.quantity ?? 0;
   const outOfStock = product.Quantity <= 0;
+  const lowStock = !outOfStock && product.Quantity <= LOW_STOCK;
+  const onSale = product.Discount > 0 && product.List_price > product.Product_price;
+
+  const handleAdd = () => {
+    dispatch(addItem(product));
+    toast.success(`${product.Product_name} added to your cart`, {
+      action: { label: 'View cart', onClick: () => dispatch(openCartDrawer()) },
+    });
+  };
+
+  const handleWish = () => {
+    dispatch(toggleWish(product.Product_id));
+    toast.toast(wished ? 'Removed from your wishlist' : 'Saved to your wishlist');
+  };
 
   return (
-    <div className="products-card">
-      <Link to={`/product/${product.Product_id}`} style={style}>
-        <img
-          src={product.Product_image}
-          alt={product.Product_name}
-          loading="lazy"
-          onError={onImageError}
-        />
-      </Link>
+    <article className="products-card">
+      <div className="products-card__media">
+        <Link to={`/product/${product.Product_id}`} aria-label={product.Product_name}>
+          <img
+            src={product.Product_image}
+            alt={product.Product_name}
+            loading="lazy"
+            onError={onImageError}
+          />
+        </Link>
+
+        <button
+          type="button"
+          className={`wish-button${wished ? ' is-wished' : ''}`}
+          onClick={handleWish}
+          aria-pressed={wished}
+          aria-label={wished ? `Remove ${product.Product_name} from wishlist` : `Save ${product.Product_name} to wishlist`}
+        >
+          {wished ? <IoHeart /> : <IoHeartOutline />}
+        </button>
+
+        <div className="products-card__flags">
+          {onSale && <span className="flag flag--sale">Save {formatMoney(product.Discount)}</span>}
+          {outOfStock && <span className="flag flag--out">Sold out</span>}
+        </div>
+      </div>
+
       <div className="products-card__body">
-        <h5>{product.Product_name}</h5>
-        <h6>${product.Product_price.toLocaleString()}</h6>
-        {outOfStock && <span className="badge-out">Out of stock</span>}
+        <Link to={`/product/${product.Product_id}`} className="products-card__title">
+          {product.Product_name}
+        </Link>
+
+        {product.Review_count > 0 && (
+          <Stars rating={product.Rating} count={product.Review_count} size="sm" />
+        )}
+
+        <p className="products-card__price">
+          <span className="price-now">{formatMoney(product.Product_price)}</span>
+          {onSale && <s className="price-was">{formatMoney(product.List_price)}</s>}
+        </p>
+
+        {lowStock && <p className="stock-warning">Only {product.Quantity} left</p>}
       </div>
 
       <div className="product-action">
-        <Link to={`/product/${product.Product_id}`} style={style}>
-          <button type="button" className="call-to-action-button">
-            View More
-          </button>
-        </Link>
-
         {cartItem ? (
-          <div className="call-to-action-button quantity-stepper">
+          <div className="quantity-stepper">
             <button
               type="button"
               className="count-button"
@@ -53,7 +98,7 @@ function Product({ product }) {
             >
               −
             </button>
-            <span aria-live="polite">{quantity}</span>
+            <span aria-live="polite">{quantity} in cart</span>
             <button
               type="button"
               className="count-button"
@@ -69,13 +114,13 @@ function Product({ product }) {
             type="button"
             className="call-to-action-button"
             disabled={outOfStock}
-            onClick={() => dispatch(addItem(product))}
+            onClick={handleAdd}
           >
-            <IoCartOutline /> Add to cart
+            <IoCartOutline /> {outOfStock ? 'Sold out' : 'Add to cart'}
           </button>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 

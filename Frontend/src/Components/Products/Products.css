@@ -1,31 +1,53 @@
+/* The featured band on the landing page. It previously sat on a beige gradient
+   behind beige cards, so nothing separated foreground from background. It is
+   now plain ground with real space around it, which is what carries the
+   "considered" feel far more than any accent colour would. */
+
 .products_container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3.5rem 1.5rem 0;
-  font-family: 'Italiana', serif;
-  background: linear-gradient(150deg, #e3e2e1 0%, #f0e8d0 65%, #f7eacd 100%);
+  width: 100%;
+  padding: 4.5rem 1.5rem 3rem;
+  background: var(--bone);
 }
 
 .products_container > h2 {
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
-/* An auto-fill grid, so cards reflow at every width instead of being pinned to
-   13vw — which was unreadably narrow on a phone and tiny on a wide monitor. */
+.products_container > .section-lede {
+  max-width: 44ch;
+  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: 2.5rem 1.75rem;
   width: 100%;
   max-width: 78rem;
-  padding: 2.5rem 0;
+  padding: 0 0 3rem;
 }
 
-@media (max-width: 480px) {
+.view-all {
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 640px) {
+  .products_container {
+    padding: 3rem 1.25rem 2rem;
+  }
+
   .products {
-    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 100%), 1fr));
+    gap: 2rem 1rem;
   }
 }

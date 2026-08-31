@@ -20,10 +20,10 @@
 }
 
 .admin-logo {
-  font-family: 'Italiana', serif;
+  font-family: var(--font-display);
   font-size: 1.35rem;
   letter-spacing: 0.08em;
-  color: #f3f0ea;
+  color: var(--line-soft);
   text-decoration: none;
 }
 
@@ -51,7 +51,7 @@
    where you were. */
 .navigation .links a.active {
   background: var(--sand);
-  color: #1f1c19;
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -103,7 +103,7 @@
 
 .dashboard .flashcards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
   gap: 1.25rem;
   padding: 1.5rem;
 }
@@ -227,4 +227,36 @@
   .product-update-form {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------- dashboard alerts + panels ---------- */
+
+.admin-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0 1.5rem 0.5rem;
+}
+
+.admin-alert {
+  padding: 0.65rem 0.9rem;
+  font-size: 0.88rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 3px solid #c9a227;
+  border-radius: 8px;
+}
+
+.admin-alert--warn {
+  border-left-color: var(--danger);
+}
+
+.admin-panel {
+  padding: 1.5rem 0 0;
+}
+
+.admin-panel h2 {
+  padding: 0 1.5rem 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }

@@ -1,0 +1,156 @@
+.reviews {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.reviews h2 {
+  margin-bottom: 1.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 400;
+}
+
+.reviews__summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 2.5rem;
+  align-items: center;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.reviews__score {
+  text-align: center;
+}
+
+.reviews__average {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.reviews__total {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.reviews__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-width: 22rem;
+}
+
+.reviews__bar {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.reviews__bar-track {
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.reviews__bar-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
+}
+
+.reviews__bar-count {
+  text-align: right;
+}
+
+.reviews__signin {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 36rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.review-form label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.review-form .button-primary {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.reviews__list {
+  list-style: none;
+}
+
+.review {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.review__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.review__author {
+  font-weight: 600;
+}
+
+.review__verified {
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.review__date {
+  margin-left: auto;
+  color: var(--ink-soft);
+}
+
+.review__body {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.reviews__empty {
+  padding: 2rem 0;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 780px) {
+  .reviews__summary {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+
+  .review__date {
+    margin-left: 0;
+    width: 100%;
+  }
+}

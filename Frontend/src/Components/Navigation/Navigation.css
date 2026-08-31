@@ -1,49 +1,64 @@
-.Navigation {
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 30;
+  background: var(--bone);
+  border-bottom: 1px solid var(--line);
+}
+
+.Navigation {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
   padding: 0.75rem 1.5rem;
-  background: rgb(227 226 225);
-  font-family: 'Italiana', serif;
+  font-family: var(--font-display);
 }
 
 .abby-navigation-logo {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  font-size: 1.5rem;
+  gap: 0.75rem;
 }
 
 .logo {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  letter-spacing: 0.16em;
   text-decoration: none;
-  letter-spacing: 0.08em;
+}
+
+.nav-menu-toggle {
+  display: none;
+  font-size: 1.4rem;
 }
 
 .abby-navigation-left {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
-/* The search box is a real form now, so Enter submits it. */
+/* ---------- search ---------- */
+
+.search-wrap {
+  position: relative;
+}
+
 .search-form {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .search-form input {
-  width: clamp(8rem, 22vw, 15rem);
-  padding: 0.45rem 0.85rem;
-  font-size: 0.9rem;
-  background: #e3e2e1;
-  border: 1px solid #202020a1;
-  border-radius: 20px;
+  width: clamp(9rem, 26vw, 20rem);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
 .search-icon {
@@ -54,61 +69,202 @@
   cursor: pointer;
 }
 
+.suggestions {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  z-index: 40;
+  width: min(24rem, 90vw);
+  max-height: 24rem;
+  overflow-y: auto;
+  list-style: none;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgb(26 23 20 / 10%);
+}
+
+.suggestions button {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.suggestions button:hover {
+  background: var(--line-soft);
+}
+
+.suggestions img {
+  width: 2.6rem;
+  height: 3.1rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.suggestions__name {
+  flex: 1;
+  min-width: 0;
+}
+
+.suggestions__price {
+  font-weight: 600;
+}
+
+.suggestions__all {
+  border-top: 1px solid var(--line);
+}
+
+.suggestions__all button {
+  justify-content: center;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* ---------- icons ---------- */
+
+.nav-icon {
+  position: relative;
+  display: inline-flex;
+  padding: 0.2rem;
+  color: inherit;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-badge {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.5rem;
+  min-width: 1.1rem;
+  padding: 0 0.22rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.1rem;
+  text-align: center;
+  color: var(--bone);
+  background: var(--ink);
+  border-radius: 999px;
+}
+
 .profile-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.profile-group .link-button {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.85rem;
+.nav-signout {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
 }
 
-.profile {
-  display: inline-flex;
+/* ---------- category bar ---------- */
+
+.category-bar {
+  display: flex;
+  gap: 2rem;
+  padding: 0 1.5rem 0.75rem;
+  overflow-x: auto;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  scrollbar-width: none;
+}
+
+.category-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.category-bar a {
+  padding-bottom: 0.25rem;
+  color: var(--ink-soft);
   text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid transparent;
 }
 
-/* The badge is positioned against the icon rather than nudged with a magic
-   negative offset that only lined up at one viewport width. */
-.cart-icon {
-  position: relative;
-  display: inline-flex;
+.category-bar a:hover {
+  color: var(--ink);
 }
 
-.cart-count {
-  position: absolute;
-  top: -0.4rem;
-  right: -0.6rem;
-  min-width: 1.15rem;
-  padding: 0 0.25rem;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  line-height: 1.15rem;
-  text-align: center;
-  color: #fff;
-  background: #1f1c19;
-  border-radius: 999px;
+.category-bar a.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 780px) {
   .Navigation {
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 1rem;
+    gap: 0.6rem;
+  }
+
+  .abby-navigation-logo {
+    font-size: 1.25rem;
+  }
+
+  .nav-menu-toggle {
+    display: inline-flex;
   }
 
   .abby-navigation-left {
-    width: 100%;
-    justify-content: space-between;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
-  .search-form {
+  /* Search drops to its own full-width row rather than squeezing the icons
+     off the right edge. */
+  .abby-navigation-left {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search-wrap {
     flex: 1;
+    min-width: 0;
   }
 
   .search-form input {
     width: 100%;
+  }
+
+  .suggestions {
+    width: 100%;
+  }
+
+  .nav-signout {
+    display: none;
+  }
+
+  /* The category strip collapses behind the hamburger on small screens. */
+  .category-bar {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem 1rem 0.75rem;
+  }
+
+  .category-bar.is-open {
+    display: flex;
+  }
+
+  .category-bar a {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .category-bar a.active {
+    border-bottom-color: var(--line);
   }
 }

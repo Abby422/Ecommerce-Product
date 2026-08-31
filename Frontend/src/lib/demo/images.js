@@ -1,0 +1,51 @@
+// Every id below was checked to resolve before being committed. Product imagery
+// is hotlinked, so components render it through `onImageError`, which swaps in
+// an inline SVG if a URL ever rots.
+
+const UNSPLASH = (id, w = 900) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+
+export const IMG = {
+  armchairCream: UNSPLASH('1567538096630-e0c55bd6374c'),
+  lampTask: UNSPLASH('1507473885765-e6ed057f782c'),
+  consoleWalnut: UNSPLASH('1532372320572-cda25653a26d'),
+  slateSurface: UNSPLASH('1578662996442-48f60103fc96'),
+  sofaGreyRoom: UNSPLASH('1493663284031-b7e3aefcae8e'),
+  lampTripod: UNSPLASH('1517991104123-1d56a6e81ed9'),
+  bedroomNightstand: UNSPLASH('1522771739844-6a9f6d5f14af'),
+  platterRoast: UNSPLASH('1594221708779-94832f4320d1'),
+  rugRolled: UNSPLASH('1600166898405-da9535204843'),
+  glassware: UNSPLASH('1544145945-f90425340c7e'),
+  pillowWhite: UNSPLASH('1584100936595-c0654b55a2e2'),
+  clockWall: UNSPLASH('1533090161767-e6ffed986c88'),
+  pendantWhite: UNSPLASH('1513506003901-1e6a229e2d15'),
+  bistroSet: UNSPLASH('1519710164239-da123dc03ef4'),
+  pendantBrass: UNSPLASH('1540932239986-30128078f3c5'),
+  floorLampRoom: UNSPLASH('1524758631624-e2822e304c36'),
+  pendantCounter: UNSPLASH('1524484485831-a92ffc0de03f'),
+  kitchenGreens: UNSPLASH('1565538810643-b5bdb714032a'),
+  sofaGreen: UNSPLASH('1555041469-a586c61ea9bc'),
+  armchairMustard: UNSPLASH('1550226891-ef816aed4a98'),
+  diningDark: UNSPLASH('1538688525198-9b88f6f53126'),
+  stoolWhite: UNSPLASH('1503602642458-232111445657'),
+  storageMudroom: UNSPLASH('1516455207990-7a41ce80f7ee'),
+  livingBright: UNSPLASH('1560448204-e02f11c3d0e2'),
+  bedBench: UNSPLASH('1505693416388-ac5ce068fe85'),
+  bedroomOttoman: UNSPLASH('1540518614846-7eded433c457'),
+  sectionalGrey: UNSPLASH('1583847268964-b28dc8f51f92'),
+  shelvingOak: UNSPLASH('1595428774223-ef52624120d2'),
+  chairYellowArt: UNSPLASH('1586023492125-27b2c045efd7'),
+  livingRed: UNSPLASH('1522708323590-d24dbb6b0267'),
+  sofaYellow: UNSPLASH('1571460777051-cd3a0ae6a3a4'),
+  livingPastel: UNSPLASH('1556228453-efd6c1ff04f6'),
+  diningWindow: UNSPLASH('1519643381401-22c77e60520e'),
+  vaseGrass: UNSPLASH('1513161455079-7dc1de15ef3e'),
+  livingWarm: UNSPLASH('1560185127-6ed189bf02f4'),
+  livingNeutral: UNSPLASH('1616486338812-3dadae4b4ace'),
+  planterSnake: UNSPLASH('1567225557594-88d73e55f2cb'),
+  livingRounded: UNSPLASH('1631679706909-1844bbd07221'),
+  livingPendants: UNSPLASH('1615529182904-14819c35db37'),
+  chairMoulded: UNSPLASH('1592078615290-033ee584e267'),
+  deskWhite: UNSPLASH('1449247709967-d4461a6a6103'),
+  tableRound: UNSPLASH('1487015307662-6ce6210680f1'),
+};

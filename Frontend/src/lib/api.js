@@ -56,16 +56,17 @@ async function demo(fn, ms) {
 
 export const api = {
   // ---- catalogue -------------------------------------------------------
-  async getProducts({ pageNumber = 1, rowNumber = 12 } = {}) {
-    if (IS_DEMO) {
-      return demo(() => ({
-        items: demoDb.listProducts({ pageNumber, rowNumber }),
-        total: demoDb.countProducts(),
-      }));
-    }
+  async getProducts({ pageNumber = 1, rowNumber = 12, sort = 'featured', ...filters } = {}) {
+    if (IS_DEMO) return demo(() => demoDb.listProducts({ pageNumber, rowNumber, sort, ...filters }));
     // The backend exposes this as POST and expects the paging window in the body.
-    const { data } = await shop.post('/allProducts', { pageNumber, rowNumber });
+    const { data } = await shop.post('/allProducts', { pageNumber, rowNumber, sort, ...filters });
     return { items: data?.data ?? [], total: data?.total ?? (data?.data?.length ?? 0) };
+  },
+
+  async getFacets() {
+    if (IS_DEMO) return demo(() => demoDb.facets(), 80);
+    const { data } = await shop.get('/facets');
+    return data?.data ?? { counts: {}, minPrice: 0, maxPrice: 0 };
   },
 
   async searchProducts(query) {
@@ -74,16 +75,96 @@ export const api = {
     return data?.Data ?? [];
   },
 
+  async suggest(query) {
+    // Deliberately quick: this fires while the shopper is still typing.
+    if (IS_DEMO) return demo(() => demoDb.suggest(query), 90);
+    const { data } = await shop.get('/search', { params: { query, limit: 6 } });
+    return (data?.Data ?? []).slice(0, 6);
+  },
+
   async getProduct(id) {
     if (IS_DEMO) return demo(() => demoDb.getProduct(id));
     const { data } = await shop.get(`/product/${id}`);
     return data?.data?.[0] ?? null;
   },
 
-  async checkout({ UserId, quantity, total, ProductId }) {
-    if (IS_DEMO) return demo(() => demoDb.createOrder({ UserId, quantity, total, ProductId }));
-    const { data } = await shop.post('/checkout', { UserId, quantity, total, ProductId });
+  async getRelated(id) {
+    if (IS_DEMO) return demo(() => demoDb.relatedProducts(id), 120);
+    const { data } = await shop.get(`/product/${id}/related`);
+    return data?.data ?? [];
+  },
+
+  async getReviews(id) {
+    if (IS_DEMO) return demo(() => demoDb.reviewsFor(id), 120);
+    const { data } = await shop.get(`/product/${id}/reviews`);
+    return data?.data ?? [];
+  },
+
+  async addReview(review) {
+    if (IS_DEMO) return demo(() => demoDb.addReview(review));
+    const { data } = await shop.post(`/product/${review.productId}/reviews`, review);
     return data;
+  },
+
+  // ---- recently viewed / wishlist --------------------------------------
+  recordView(id) {
+    if (IS_DEMO) demoDb.recordView(id);
+  },
+
+  async getRecentlyViewed(excludeId) {
+    if (IS_DEMO) return demo(() => demoDb.recentlyViewed(excludeId), 60);
+    return [];
+  },
+
+  async getWishlist() {
+    if (IS_DEMO) return demo(() => demoDb.wishlist(), 80);
+    const { data } = await shop.get('/wishlist');
+    return data?.data ?? [];
+  },
+
+  getWishlistIds() {
+    return IS_DEMO ? demoDb.wishlistIds() : [];
+  },
+
+  async toggleWishlist(id) {
+    if (IS_DEMO) return demo(() => demoDb.toggleWishlist(id), 60);
+    const { data } = await shop.post('/wishlist', { id });
+    return data;
+  },
+
+  // ---- checkout --------------------------------------------------------
+  async getShippingMethods() {
+    if (IS_DEMO) return demo(() => demoDb.shippingMethods(), 80);
+    const { data } = await shop.get('/shipping');
+    return data?.data ?? [];
+  },
+
+  getFreeShippingThreshold() {
+    return IS_DEMO ? demoDb.freeShippingThreshold() : 500;
+  },
+
+  async applyPromo(code) {
+    if (IS_DEMO) return demo(() => demoDb.validatePromo(code), 300);
+    const { data } = await shop.post('/promo', { code });
+    return data;
+  },
+
+  async placeOrder(order) {
+    if (IS_DEMO) return demo(() => demoDb.createOrder(order), 700);
+    const { data } = await shop.post('/checkout', order);
+    return data;
+  },
+
+  async getOrders(userId) {
+    if (IS_DEMO) return demo(() => demoDb.ordersFor(userId));
+    const { data } = await shop.get('/orders');
+    return data?.data ?? [];
+  },
+
+  async getOrder(id) {
+    if (IS_DEMO) return demo(() => demoDb.getOrder(id));
+    const { data } = await shop.get(`/orders/${id}`);
+    return data?.data ?? null;
   },
 
   // ---- auth ------------------------------------------------------------
@@ -179,7 +260,15 @@ export const api = {
       orders: 0,
       revenue: 0,
       users: (await this.getUsers()).length,
+      lowStock: products.filter((p) => p.Quantity > 0 && p.Quantity <= 5).length,
+      outOfStock: products.filter((p) => p.Quantity === 0).length,
     };
+  },
+
+  async getRecentOrders(limit = 5) {
+    if (IS_DEMO) return demo(() => demoDb.recentOrders(limit));
+    const { data } = await shop.get('/orders', { params: { limit } });
+    return data?.data ?? [];
   },
 };
 

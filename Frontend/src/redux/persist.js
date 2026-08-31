@@ -21,7 +21,11 @@ export function saveState(state) {
       KEY,
       // `status` and `error` are per-attempt UI state; rehydrating a stale
       // "loading" would leave the sign-in button disabled on load.
-      JSON.stringify({ cart: state.cart, auth: { ...state.auth, status: 'idle', error: null } }),
+      JSON.stringify({
+        cart: state.cart,
+        wishlist: state.wishlist,
+        auth: { ...state.auth, status: 'idle', error: null },
+      }),
     );
   } catch {
     // Quota exceeded or storage blocked — the session just will not survive a reload.

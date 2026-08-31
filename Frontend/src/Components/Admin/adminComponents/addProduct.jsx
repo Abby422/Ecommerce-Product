@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api, errorMessage } from '../../../lib/api';
 
-const CATEGORIES = ['Kitchen and Dining', 'Living Room', 'Bedroom', 'Lighting'];
+import { CATEGORIES } from '../../../lib/demo/catalogue';
 
 const EMPTY = {
-  categoryName: CATEGORIES[0],
+  categoryName: CATEGORIES[0].slug,
   productName: '',
   productDesc: '',
   productImg: '',
@@ -56,8 +56,8 @@ const AddProduct = () => {
             onChange={handleChange}
           >
             {CATEGORIES.map((category) => (
-              <option key={category} value={category}>
-                {category}
+              <option key={category.slug} value={category.slug}>
+                {category.name}
               </option>
             ))}
           </select>
