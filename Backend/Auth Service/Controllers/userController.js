@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 const amqp = require('amqplib')
 require('dotenv').config()
 
-//TOKEN = ***REMOVED-JWT-SECRET***
-
 const userControllers = {
   Register: async (req, res) => {
     const { userName, email, Name, password } = req.body;
