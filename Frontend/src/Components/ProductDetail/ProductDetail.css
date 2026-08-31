@@ -1,49 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.product {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
 }
 
-.call-to-action-button{
-    width: 20%;
-    font-family: 'Source Sans Pro', sans-serif;
-    margin: 5px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    list-style: none;
-    flex-direction: row;
-    font-weight: bolder;
-    justify-content: space-around;
-    border: none;
-    background-color: #fdedc0;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 5px 7px;
-    border-radius: 45px;
-  }
-  .product{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-  }
-.productImage img{
-    border-radius: 20px;
-    width: 500px;
-    height: 500px;
+.productImage img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
 }
-  .detail-container{
-    margin-left: 50px;
-    margin-top: 100px;
-    font-size: 1.5rem;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 300;
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-content h2 {
+  font-family: 'Italiana', serif;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  margin-bottom: 0.75rem;
+}
+
+.detail-content p {
+  color: var(--ink-soft);
+}
+
+.price {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.discount {
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #2f6b46;
+  background: #e6f2ea;
+  border-radius: 999px;
+}
+
+.stock {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.product-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.product-buttons .call-to-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.5rem;
+  font: inherit;
+  font-weight: 600;
+  background: var(--sand);
+  border: none;
+  border-radius: 45px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.product-missing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 1.5rem;
+}
+
+@media (max-width: 800px) {
+  .product {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  .count-button{
-    width: 20%;
-    height: 20px;
-    font-size: 1rem;
-    border: 1px solid #fdedc0;
-    background-color: #fdedc0;
-    border: none;
-  }
+}

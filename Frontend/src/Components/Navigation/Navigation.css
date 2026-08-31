@@ -1,73 +1,114 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.Navigation {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgb(227 226 225);
+  font-family: 'Italiana', serif;
 }
 
-.Navigation{
-    padding-top: 10px ;
-    padding-bottom: 5px;
+.abby-navigation-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.logo {
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+
+.abby-navigation-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* The search box is a real form now, so Enter submits it. */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.search-form input {
+  width: clamp(8rem, 22vw, 15rem);
+  padding: 0.45rem 0.85rem;
+  font-size: 0.9rem;
+  background: #e3e2e1;
+  border: 1px solid #202020a1;
+  border-radius: 20px;
+}
+
+.search-icon {
+  display: inline-flex;
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-group .link-button {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+.profile {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+/* The badge is positioned against the icon rather than nudged with a magic
+   negative offset that only lined up at one viewport width. */
+.cart-icon {
+  position: relative;
+  display: inline-flex;
+}
+
+.cart-count {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.6rem;
+  min-width: 1.15rem;
+  padding: 0 0.25rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  text-align: center;
+  color: #fff;
+  background: #1f1c19;
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .Navigation {
+    padding: 0.75rem 1rem;
+  }
+
+  .abby-navigation-left {
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    position: sticky;
-    background: rgba(227,226,225,1);
-    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
-    /* background: linear-gradient(150deg, rgb(248, 239, 221) 0%, rgba(240,232,208,1) 10%, rgba(227,226,225,1) 100%);     */
-    font-family: 'Italiana', serif;
-    font-size: 30px;
-    z-index: 2;
-}
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
 
-.abby-navigation-logo{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 20px;
-    justify-content: center;
-    padding-left: 10px;
-    justify-content: space-around;
-}
+  .search-form {
+    flex: 1;
+  }
 
-.logo{
-    margin-left: 35px;
-}
-.abby-navigation-left{
-    position: relative;
-    right: 0;
-    display: flex;
-    width: 10%;
-    justify-content: space-evenly;
-    right: 50px;
-}
-
-.abby-navigation-left input{
-    border-radius: 20px;
-    border: 1px solid #202020a1;
-    background: #e3e2e1;
-    padding: 10px;
-    color: black;
-    font-size: 0.9rem;
-}
-.search-icon{
-    margin-right: 60px;
-    margin-left: 10px;
-}
-.profile{
-    margin-right: 40px;
-}
-.cart-icon{
-    margin-right: 20px;
-}
-.cart-count{
-    position: absolute;
-    top: -10px;
-    width: fit-content;
-    height: fit-content;
-    right: -130px;
-    font-size: 1.2rem;
-    color: black;
-    font-weight: 700;
-    border-radius: 5px;
+  .search-form input {
+    width: 100%;
+  }
 }

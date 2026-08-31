@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# SPACEJOY — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A home-decor storefront with a full admin dashboard. React 18, Redux Toolkit, React Router 6, built with Vite.
 
-## Available Scripts
+## Running it
 
-In the project directory, you can run:
+```bash
+pnpm install
+pnpm dev          # http://localhost:3000
+```
 
-### `npm start`
+That starts the app in **demo mode**: no backend required. Catalogue, users and
+orders come from `src/lib/demo/`, and anything you change in the admin area is
+saved to your browser's `localStorage`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+Demo admin — admin@spacejoy.demo / demo1234
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To run against the real Express + SQL Server backend in `../Backend`, copy
+`.env.example` to `.env` and fill in the two URLs:
 
-### `npm test`
+```bash
+VITE_API_URL=http://localhost:5001     # Business Logic service
+VITE_AUTH_URL=http://localhost:5006    # Auth service
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`src/lib/api.js` is the only module that knows which mode is active. Components
+call `api.getProducts()` and friends and never branch on it.
 
-### `npm run build`
+## Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Command | What it does |
+| --- | --- |
+| `pnpm dev` | Vite dev server with HMR |
+| `pnpm build` | Production build into `build/` |
+| `pnpm preview` | Serve the production build locally |
+| `pnpm lint` | ESLint (flat config, react + hooks rules) |
+| `pnpm test:e2e` | 21-check end-to-end smoke test in real Chrome |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`pnpm test:e2e` needs a build first — it serves `build/` and drives it with
+Playwright, failing on any uncaught console or page error.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Layout
 
-### `npm run eject`
+```
+src/
+  lib/
+    api.js           single API surface; demo mode lives behind the same calls
+    useAsync.js      fetch-on-mount hook with cancellation and a reload()
+    placeholder.js   inline SVG fallback for images that fail to load
+    demo/            fixtures + a localStorage-backed database
+  redux/
+    slices/          cart and auth — client state only
+    persist.js       localStorage persistence with a leading-edge throttle
+  Components/
+    common/          ProtectedRoute, loading/error/empty blocks, demo banner
+    …                one folder per screen, each with its own stylesheet
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Server data is not kept in Redux. Each screen fetches what it needs through
+`useAsync`, so it can't go stale; Redux holds the cart and the session, which
+are genuinely client state and are persisted across reloads.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deploying
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Vercel picks this up as a Vite project. `vercel.json` sets the SPA rewrite,
+long-lived caching for hashed assets, and a few security headers.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Leave `VITE_API_URL` unset in the Vercel project and the deployed site runs in
+demo mode, which is what makes it work as a portfolio piece with no server to
+keep alive.

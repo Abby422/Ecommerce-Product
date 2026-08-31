@@ -1,27 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.products_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5rem 1.5rem 0;
+  font-family: 'Italiana', serif;
+  background: linear-gradient(150deg, #e3e2e1 0%, #f0e8d0 65%, #f7eacd 100%);
 }
 
-.products_container{
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 100px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Italiana', serif;
-    background: rgb(227,226,225);
-    background: linear-gradient(150deg, rgba(227,226,225,1) 0%, rgba(240,232,208,1) 65%, rgba(247,234,205,1) 100%);
-}    
-.products{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 5vw;
-    margin: 5vw;
-    gap: 20px;
+.products_container > h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: 0.1em;
+}
+
+/* An auto-fill grid, so cards reflow at every width instead of being pinned to
+   13vw — which was unreadably narrow on a phone and tiny on a wide monitor. */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 78rem;
+  padding: 2.5rem 0;
+}
+
+@media (max-width: 480px) {
+  .products {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 1rem;
+  }
 }

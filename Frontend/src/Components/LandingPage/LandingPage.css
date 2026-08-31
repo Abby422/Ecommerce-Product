@@ -1,95 +1,123 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.home-content-container{
-    display: flex;
-    flex-direction: column;
-}
-.landing-page-container{
-    background-color: #E7E4DD;
-    display: flex;
-    min-width: 90vw;
-    font-family: 'Italiana', serif;
-}
-.landingPage{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.landing-page-content{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+/* Every heading rule here is scoped to the landing page. The original file set
+   a bare `h1 { font-size: 5rem }`, which leaked into the cart, the forms and
+   the admin area because CRA bundled all component CSS into one sheet. */
+
+.home-content-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.landing-caurosel{
-    display: flex;
-    flex: 1;
-    height: 100vh;
-    margin-right: 5px;
-    overflow: hidden;
-}
-.slider{ 
-    width: 90vw;
-    height: 100vh;
-    /* z-index: 1; */
-}
-.slider img{
-    width: 100%;
-    height: 100%;
-}
-.slick-arrow.slick-prev,
-.slick-arrow.slick-next{
-    display: block;
+.landing-page-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: min(100vh, 48rem);
+  background: #e7e4dd;
+  font-family: 'Italiana', serif;
 }
 
-.social-handles{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 2;
-    right: 10px;
-    top: 40vh;
-}
-h1{
-    font-weight: 400;
-    font-size: 5rem;
-    line-height: 113px;
+.landingPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
 }
 
-h2{
-    font-size: 2rem;
-    line-height: 57px;
+.landing-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 34rem;
 }
 
-h3{
-    font-size: 1rem;
-    line-height: 28px;
+.landing-page-content h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.landing-page-content h2 {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.landing-page-content p {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
 }
 
 .call-to-action {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 10vw;
-    padding: 10px 20px;
-    font-size: 1.5rem;
-    border: none;
-    background-color: #fdedc0;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 5px 7px;
-    border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--sand);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
 }
 
-.call-to-action:hover{
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-    transform: scale(1.12);
+.landing-caurosel {
+  overflow: hidden;
+}
 
+.slider-container,
+.landing-caurosel .slick-slider,
+.landing-caurosel .slick-list,
+.landing-caurosel .slick-track,
+.landing-caurosel .slick-slide > div {
+  height: 100%;
+}
+
+.landing-caurosel img.slider {
+  width: 100%;
+  height: min(100vh, 48rem);
+  object-fit: cover;
+}
+
+.social-handles {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transform: translateY(-50%);
+}
+
+.social-handles a {
+  display: inline-flex;
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .landing-page-container {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .landingPage {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .landing-caurosel img.slider {
+    height: 55vh;
+  }
+
+  .social-handles {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem 0;
+    transform: none;
+  }
 }
