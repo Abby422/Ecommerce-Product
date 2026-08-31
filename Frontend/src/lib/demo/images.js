@@ -36,7 +36,7 @@ export const IMG = {
   shelvingOak: UNSPLASH('1595428774223-ef52624120d2'),
   chairYellowArt: UNSPLASH('1586023492125-27b2c045efd7'),
   livingRed: UNSPLASH('1522708323590-d24dbb6b0267'),
-  sofaYellow: UNSPLASH('1571460777051-cd3a0ae6a3a4'),
+  sofaYellow: UNSPLASH('1558211583-d26f610c1eb1'),
   livingPastel: UNSPLASH('1556228453-efd6c1ff04f6'),
   diningWindow: UNSPLASH('1519643381401-22c77e60520e'),
   vaseGrass: UNSPLASH('1513161455079-7dc1de15ef3e'),

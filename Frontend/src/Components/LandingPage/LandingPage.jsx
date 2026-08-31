@@ -98,29 +98,31 @@ function LandingPage() {
 
       </section>
 
-      <ul className="value-props">
-        <li>
-          <IoRefreshOutline />
-          <div>
-            <strong>Free 30-day returns</strong>
-            <span>Changed your mind? Send it back.</span>
-          </div>
-        </li>
-        <li>
-          <IoLeafOutline />
-          <div>
-            <strong>Responsibly sourced</strong>
-            <span>FSC timber and undyed natural fibres.</span>
-          </div>
-        </li>
-        <li>
-          <IoRibbonOutline />
-          <div>
-            <strong>Built to last</strong>
-            <span>Up to 10 years on frames.</span>
-          </div>
-        </li>
-      </ul>
+      <div className="value-props-wrap">
+        <ul className="value-props">
+          <li>
+            <IoRefreshOutline />
+            <div>
+              <strong>Free 30-day returns</strong>
+              <span>Changed your mind? Send it back.</span>
+            </div>
+          </li>
+          <li>
+            <IoLeafOutline />
+            <div>
+              <strong>Responsibly sourced</strong>
+              <span>FSC timber and undyed natural fibres.</span>
+            </div>
+          </li>
+          <li>
+            <IoRibbonOutline />
+            <div>
+              <strong>Built to last</strong>
+              <span>Up to 10 years on frames.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
 
       <section className="category-grid-section">
         <h2>Shop by room</h2>
@@ -139,11 +141,14 @@ function LandingPage() {
       </section>
 
       <section className="products_container" id="shop">
-        <h2>Featured</h2>
-        <p className="section-lede">
-          The pieces our customers come back for — chosen for how they wear, not how they
-          photograph.
-        </p>
+        <header className="section-head">
+          <h2>Featured</h2>
+          <p className="section-lede">
+            The pieces our customers come back for — chosen for how they wear, not how they
+            photograph.
+          </p>
+        </header>
+
         {status === 'loading' ? (
           <SkeletonGrid count={8} />
         ) : (
@@ -153,6 +158,7 @@ function LandingPage() {
             ))}
           </div>
         )}
+
         <Link to="/shop" className="button-secondary view-all">
           View all products
         </Link>

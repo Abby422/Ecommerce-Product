@@ -140,15 +140,19 @@
      holding three tracks open and overflowing. */
   grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   gap: 1.5rem;
-  max-width: 72rem;
+  max-width: var(--page);
   margin: 0 auto;
-  padding: 2.5rem 1.5rem;
+  padding: 2rem 0;
   list-style: none;
 }
 
 .value-props {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+
+.value-props-wrap {
+  padding: 0 var(--gutter);
 }
 
 .value-props li {
@@ -182,13 +186,16 @@
 }
 
 .category-grid-section {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 1rem 1.5rem 3rem;
+  padding: 1rem var(--gutter) 3rem;
+}
+
+.category-grid-section > * {
+  max-width: var(--page);
+  margin-inline: auto;
 }
 
 .category-grid-section {
-  padding-top: 3.5rem;
+  padding-top: 4rem;
 }
 
 .category-grid-section h2 {
@@ -198,18 +205,33 @@
   font-weight: 400;
 }
 
+/* Explicit column counts rather than auto-fit: with six categories, auto-fit
+   resolved to five across at desktop and stranded the sixth alone on a second
+   row. Three and two divide evenly. */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .category-tile {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 14rem;
-  padding: 1.15rem;
+  min-height: 17rem;
+  padding: 1.25rem;
   color: #fff;
   text-decoration: none;
   background-size: cover;

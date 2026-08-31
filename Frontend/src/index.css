@@ -24,6 +24,12 @@
   --danger: #9c3b2f;
   --gold: #b8892f;
 
+  /* One content measure for every band on the page. Sections previously used
+     72rem or 78rem depending on which component owned them, so their left
+     edges stepped in and out as you scrolled. */
+  --page: 78rem;
+  --gutter: 1.5rem;
+
   --radius: 3px;
   --radius-lg: 4px;
   --shadow: 0 1px 2px rgb(26 23 20 / 6%);
@@ -438,4 +444,83 @@ textarea {
 
 main {
   min-height: 60vh;
+}
+
+/* ---------- product grid ----------
+
+   These live here rather than in a component stylesheet because several screens
+   render the same markup — the landing page's featured band, the shop results,
+   the wishlist and the loading skeletons. When the grid lived in a component
+   that the landing page had stopped importing, its stylesheet fell out of the
+   bundle entirely and the featured cards stacked full-bleed down the page. A
+   shared class needs a shared home. */
+
+.products_container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  padding: 4.5rem var(--gutter) 2rem;
+}
+
+/* Headings sit left against the same measure as every other band, rather than
+   centred — a centred heading over a left-aligned grid was what made the
+   section read as borrowed from a different page. */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto 2.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--line);
+}
+
+.products_container h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 400;
+}
+
+.section-lede {
+  max-width: 52ch;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: 2.75rem 1.75rem;
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding-bottom: 2.5rem;
+}
+
+.view-all {
+  align-self: center;
+  margin-bottom: 4.5rem;
+}
+
+@media (max-width: 640px) {
+  .products_container {
+    padding: 3.5rem 1.25rem 1.5rem;
+  }
+
+  .section-lede {
+    margin-bottom: 2rem;
+  }
+
+  .products {
+    grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 100%), 1fr));
+    gap: 2rem 1rem;
+  }
+
+  .view-all {
+    margin-bottom: 3.5rem;
+  }
 }

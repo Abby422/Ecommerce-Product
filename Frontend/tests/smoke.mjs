@@ -111,6 +111,52 @@ await check('landing page renders featured products and category tiles', async (
   if (tiles !== 6) throw new Error(`expected 6 category tiles, got ${tiles}`);
 });
 
+// Counting cards is not enough: the featured grid once rendered all eight in a
+// full-bleed stack because the stylesheet defining `.products` belonged to a
+// component the landing page had stopped importing. Assert the layout resolved.
+await check('featured grid lays out as a real multi-column grid', async () => {
+  const grid = await page.evaluate(() => {
+    const el = document.querySelector('#shop .products');
+    if (!el) return null;
+    const cs = getComputedStyle(el);
+    return {
+      display: cs.display,
+      columns: cs.gridTemplateColumns.split(' ').filter(Boolean).length,
+      width: Math.round(el.getBoundingClientRect().width),
+      viewport: document.documentElement.clientWidth,
+    };
+  });
+  if (!grid) throw new Error('#shop .products not found');
+  if (grid.display !== 'grid') throw new Error(`display is "${grid.display}"`);
+  if (grid.columns < 3) throw new Error(`resolved to ${grid.columns} column(s)`);
+  if (grid.width >= grid.viewport) {
+    throw new Error(`grid is ${grid.width}px inside a ${grid.viewport}px viewport — not contained`);
+  }
+});
+
+await check('every product image on the landing page actually loaded', async () => {
+  // Cards below the fold are `loading="lazy"`, so scroll the page first —
+  // otherwise this only proves the first row was requested.
+  await page.evaluate(async () => {
+    const step = window.innerHeight;
+    for (let y = 0; y < document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForFunction(
+    () => [...document.querySelectorAll('.products-card img')].every((img) => img.complete),
+    { timeout: 15000 },
+  );
+  const broken = await page.evaluate(() =>
+    [...document.querySelectorAll('.products-card img')]
+      .filter((img) => img.naturalWidth === 0)
+      .map((img) => img.alt || img.src),
+  );
+  if (broken.length) throw new Error(`${broken.length} broken: ${broken.slice(0, 3).join(', ')}`);
+});
+
 await check('skeletons appear before products load', async () => {
   await page.goto(`${BASE}/shop`, { waitUntil: 'commit' });
   await page.waitForSelector('.skeleton-card', { timeout: 5000 });
