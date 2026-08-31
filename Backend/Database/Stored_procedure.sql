@@ -157,11 +157,14 @@ GO
 
 
 ----Delete product-----
+-- Supersedes the spDeleteProduct defined earlier in this file, which did a hard
+-- DELETE. This soft-deletes instead, and the flag must be set to 1 — setting it
+-- to 0 marked the product as NOT deleted, so deleting a product did nothing.
 CREATE OR ALTER PROC spDeleteProduct(@productID INT)
 AS
 BEGIN
-        UPDATE Product
-    SET  isDeleted = 0
+    UPDATE Product
+    SET  isDeleted = 1
     WHERE Product_id  = @productID;
 END
 GO
